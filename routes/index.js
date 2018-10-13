@@ -6,4 +6,5 @@ router.use(express.static(path.join(__dirname,'../','public')));
 router.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname,'../','Views/index.html'));
 });
+
 module.exports = router;
