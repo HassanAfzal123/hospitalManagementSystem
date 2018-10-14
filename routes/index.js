@@ -10,7 +10,6 @@ router.get('/', function(req, res, next) {
 router.post('/recipt', function(req, res, next) {
     var reportid = req.body.reportid;
     var queryString = 'SELECT * FROM reports WHERE id=?';
-    console.log(reportid);
 
     reqapp.connection.query(queryString, reportid, function(err, rows, fields) {
         if (err) throw err;
