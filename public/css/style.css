@@ -170,12 +170,13 @@ banner
 	padding-bottom:15px;
 }
 .btn-appoint, .btn-appoint:hover, .btn-appoint:focus{
-	margin-top: 30px;
-	padding: 10px 20px;
+	margin-top: 0px;
+	padding: 5px 10px;
 	font-size: 12px;
 	background-color: rgba(12, 184, 182, 0.91);
 	border-radius: 3px;
 	color: #fff;
+    height: 27px;
 }
 .overlay-detail a i {
     text-align: center;
@@ -207,6 +208,14 @@ banner
 }
 .login-form-padding{
     padding-top: 30px;
+}
+.report-form-padding{
+    padding-top: 30px;
+}
+.report-id,.report-id:hover,report-id:focus{
+    color: black;
+    border-radius: 5px;
+    height: 30px;
 }
 /***************************************
 services
