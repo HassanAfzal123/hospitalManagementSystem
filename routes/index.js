@@ -7,7 +7,6 @@ router.use(express.static(path.join(__dirname,'../','public')));
 router.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname,'../','Views/index.html'));
 });
-<<<<<<< HEAD
 router.post('/recipt', function(req, res, next) {
     var reportid = req.body.reportid;
     var queryString = 'SELECT * FROM reports WHERE id=?';
@@ -23,7 +22,5 @@ router.post('/recipt', function(req, res, next) {
 
     });
 });
-=======
->>>>>>> 2515514c54a1f245d0f435db01f9f4eb3e915af5
 
 module.exports = router;
