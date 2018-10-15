@@ -138,7 +138,7 @@ banner
 }
 .affix .navbar-nav > li > a:hover, .affix .navbar-nav > li > a:focus
 {
-    background-color: rgba(12, 184, 182) !important;
+    background-color: rgba(12, 184, 182,1) !important;
 }
 #banner{
 	background: url('../img/bg-banner.jpg') no-repeat fixed;
@@ -216,6 +216,10 @@ banner
     color: black;
     border-radius: 5px;
     height: 30px;
+}
+.labortareport-input{
+    border-radius: 5px;
+    margin-top: 30px;
 }
 /***************************************
 services
