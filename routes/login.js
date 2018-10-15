@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const reqapp = require('../app');
+const db = require('../database');
 const router = express.Router();
 router.use(express.static(path.join(__dirname,'../','public')));
 /* GET login page.*/
@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 router.post('/authenticate', function(req, res, next) {
     var queryString = 'SELECT * FROM UserInfo';
-    reqapp.connection.query(queryString, function(err, rows, fields) {
+    db.connection.query(queryString, function(err, rows, fields) {
         if (err) throw err;
 
         for (var i in rows) {
