@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const reqapp = require('../app');
+const db = require('../database');
 const router = express.Router();
 router.use(express.static(path.join(__dirname,'../','public')));
 /* GET home page.*/
@@ -11,7 +11,7 @@ router.post('/recipt', function(req, res, next) {
     var reportid = req.body.reportid;
     var queryString = 'SELECT * FROM reports WHERE id=?';
 
-    reqapp.connection.query(queryString, reportid, function(err, rows, fields) {
+    db.connection.query(queryString, reportid, function(err, rows, fields) {
         if (err) throw err;
 
         for(i in rows){
