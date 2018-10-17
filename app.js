@@ -7,6 +7,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const donateBlood = require('./routes/donateBlood');
+const locationRouter = require('./routes/location');
 const reportUploadRouter = require('./routes/labortoryReports');
 const app = express();
 
@@ -24,6 +25,7 @@ app.use('/user', usersRouter);
 app.use('/login', loginRouter);
 app.use('/labortaryreports', reportUploadRouter);
 app.use('/donateBlood',donateBlood);
+app.use('/location',locationRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

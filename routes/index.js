@@ -8,7 +8,7 @@ router.use(express.static(path.join(__dirname,'../','public')));
 router.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname,'../','Views/index.html'));
 });
-router.post('/recipt', function(req, res, next) {
+router.post('/getreport', function(req, res, next) {
     var reportid = req.body.reportid;
     var queryString = 'SELECT * FROM reports WHERE reportId=?';
 

@@ -221,6 +221,9 @@ banner
     border-radius: 5px;
     margin-top: 30px;
 }
+.buttons-margin{
+    margin-top: 20px;
+}
 /***************************************
 services
 ***************************************/
