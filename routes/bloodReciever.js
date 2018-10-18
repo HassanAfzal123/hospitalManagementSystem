@@ -5,8 +5,8 @@ const http = require('http');
 const router = express.Router();
 router.use(express.static(path.join(__dirname,'../','public')));
 router.get('/', function(req, res) {
-    
-    res.sendFile(path.join(__dirname,'../','Views/RequestBlood.html'));
+    var asd=123;
+    res.render(path.join(__dirname,'../','Views/layouts/RequestBlood'),{title: asd});
 });
 
 module.exports = router;

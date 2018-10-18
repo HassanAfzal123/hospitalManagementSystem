@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+var hbs = require('express-handlebars');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -13,6 +14,7 @@ const requestbloodRouter = require('./routes/bloodReciever');
 const app = express();
 
 // view engine setup
+app.engine('hbs',hbs({extname: 'hbs', defaultLayout: 'main', layout: __dirname + '/views'}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
