@@ -43,24 +43,30 @@
         <div class="container">
             <div class="row">
               <div class="banner-info"></div>
-                <div class="makeppointment-text">Upload Report</div>
-                    <form class="container">
+                <div class="makeppointment-text">Donate Blood</div>
+                    <form class="container" method="post" action="/donateBlood/submitForm">
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label class="form-labletext" for="name">Names</label>
-                                <input type="text" class="form-control" id="name" placeholder="Enter name">
+                                <label class="form-labletext" for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="donorname" placeholder="Enter name">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label class="form-labletext" for="email">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Enter email">   
+                                <input type="email" class="form-control" id="email" name="donoremail" placeholder="Enter email">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="form-labletext" for="contact">Contact</label>
+                                <input type="text" class="form-control" id="contact" name="donorcontact" placeholder="Contact Number">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label class="form-labletext" for="bloodGroup">Blood Group</label>
-                                    <select id="bloodGroup" class="form-control">
+                                    <select id="bloodGroup" name="donorbloodGroup" class="form-control">
                                         <option selected>Blood Group</option>
                                             <option vlaue='A+'>A+</option>
                                             <option vlaue='A-'>A-</option>
