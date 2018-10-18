@@ -14,7 +14,6 @@ router.post('/getreport', function(req, res, next) {
 
     
     db.connection.query(queryString, reportid, function(err, result) {
-        console.log(result);
         try{
             res.sendFile(path.join(__dirname, '../', result[0].resultAddress + ".pdf"));
         }
