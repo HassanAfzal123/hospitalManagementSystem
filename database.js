@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const connection = mysql.createConnection({
-    host: 'db4free.net',
-    user: 'myforms',
-    password: 'asdqwezxc123',
-    database: 'testingforms'
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'hms'
 });
 connection.connect((err) => {
     if (err) throw err;

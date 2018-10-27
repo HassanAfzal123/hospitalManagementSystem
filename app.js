@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var hbs = require('express-handlebars');
+var passport = require('passport');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -19,9 +20,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 app.use(express.static('public'));
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+//app.use(session({ secret: "cats" }));
+app.use(passport.initialize());
+app.use(passport.session());
+require('./Passport/passport')(passport); 
 
 app.use('/home', indexRouter);
 app.use('/user', usersRouter);
