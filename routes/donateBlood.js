@@ -15,6 +15,7 @@ router.post('/submitForm',function(req,res){
     var queryString = "INSERT INTO donateblood SET ?";
     var valuesarray = {donoremail: donoremail, donorname: donorname, donornumber: donornumber,bloodgroup: donorbloodgroup};
     db.connection.query(queryString,[valuesarray], function(err, rows, fields) {
+        if (err) throw (err);
         try{
             res.send("Thank you for your Blood donation Request. You'll be shortly contacted by someone who needs it.");
         }
