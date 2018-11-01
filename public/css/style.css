@@ -72,6 +72,12 @@ banner
     padding: 20px 0;
     transition: all 0.3s;
 }
+.navbar-default2 {
+    background-color: rgba(0,200,150,0.5);
+    padding: 20px 0;
+    transition: all 0.3s;
+    border: 5px;
+}
 .navbar-default {
     background-color: transparent;
     border: 0px;
@@ -85,6 +91,11 @@ banner
 	font-family: 'Chewy', cursive;
 	font-size: 32px;
 }
+.navbar-brand2
+{
+    font-family: 'Chewy', cursive;
+    font-size: 32px;
+}
 
 .navbar-brand img {
     padding-top: 2px;
@@ -94,13 +105,14 @@ banner
 .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
     color: #EA6045;
 }
-
+.navbar-default2 .navbar-brand2, .navbar-default2 .navbar-brand2:hover, .navbar-default2 .navbar-brand2:focus {
+    color: #EA6045;
+}
 @media (max-width: 768px) {
 	.navbar-collapse {
 		background: rgba(28,74,90, 0.9);
 	}
 }
-
 .top-nav-collapse {
     padding: 0;
     background: rgba(28,74,90, 0.9);
@@ -146,6 +158,12 @@ banner
 	min-height: 650px;
 	position: relative;
 }
+.banner3{
+    background: floralwhite;
+    background-size: cover;
+    min-height: 650px;
+    position: relative;
+}
 .bg-color{
 	background-color: RGBA(13, 70, 83, 0.78);
 	min-height: 650px;
@@ -154,8 +172,15 @@ banner
     background-color: rgba(11, 19, 1, 0.78);
     min-height: 650px;
 }
+.bg-color3{
+    background-color: RGBA(255, 255, 255, 1);
+    min-height: 650px;
+}
 .banner-info{
 	padding-top: 190px;
+}
+.banner-info2{
+    padding-top: 40px;
 }
 .banner-logo img{
 	display: inline-block;
@@ -220,6 +245,7 @@ banner
 .labortareport-input{
     border-radius: 5px;
     margin-top: 30px;
+    height: 30px;
 }
 .buttons-margin{
     margin-top: 20px;
@@ -252,6 +278,125 @@ banner
 .divide70 {
     width: 100%;
     height: 70px;
+}
+/* CARDS */
+.card {
+    position:  relative;
+    width:300px;
+    min-height:300px;
+    background:rgba(0,0,0,0.8);
+    box-shadow:0 20px 50px rgba(0,0,0,.1);
+    border-radius:10px;
+    transition:0.5s;
+    margin-bottom: 40px;
+    margin-left: 5%;
+}
+.card:hover {
+    box-shadow:0 30px 70px rgba(0,0,0,.4);
+}
+.card .box {
+    position:absolute;
+    top:50%;
+    left:0;
+    transform:translateY(-50%);
+    text-align:center;
+    padding:20px;
+    box-sizing:border-box;
+    width:100%;
+}
+.card .box .img {
+    width:120px;
+    height:120px;
+    margin:0 auto;
+    border-radius:50%;
+    overflow:hidden;
+}
+.card .box .img img {
+    width:100%;
+    height:100%;
+}
+.card .box h2 {
+    font-size:20px;
+    color:#FFFFFF;
+    margin:20px auto;
+}
+.card .box h2 span {
+    font-size:14px;
+    background:rgba(2,4,2,0.6);
+    color:#fff;
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:15px;
+    margin-top: 10px;
+}
+.card .box p {
+    color: whitesmoke;
+    text-align: center;
+    font-style: normal;
+}
+.card .box span {
+    display:inline-flex;
+}
+.card .box ul {
+    margin:0;
+    padding:0;
+}
+.card .box ul li {
+    list-style:none;
+    float:left;
+}
+.card .box ul li a {
+    display:block;
+    color:#aaa;
+    margin:0 10px;
+    font-size:20px;
+    transition:0.5s;
+    text-align:center;
+}
+.card .box ul li:hover a {
+    color:#e91e63;
+    transform:rotateY(360deg);
+}
+.button-showdetails{
+    background-color: rgba(0,0,0,.4);
+    color: #FFFFFF;
+}
+.button-showdetails:hover{
+    background-color: rgba(2,2,2,.8);
+    color: #FFFFFF;
+}
+.button-showdetails:active{
+    background-color: rgba(2,2,2,.8);
+    color: #FFFFFF;
+}
+.button-showdetails:after{
+    background-color: rgba(2,2,2,.8);
+    color: #FFFFFF;
+}
+.button-showdetails:focus{
+    background-color: rgba(2,2,2,.8);
+    color: #FFFFFF;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    cursor: inherit;
+    display: block;
+}
+.margin-showbtn-details{
+    margin: 2% 10%;
 }
 /***************************************
 services
