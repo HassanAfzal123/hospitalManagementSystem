@@ -12,6 +12,8 @@ const donateBlood = require('./routes/donateBlood');
 const locationRouter = require('./routes/location');
 const reportUploadRouter = require('./routes/labortoryReports');
 const requestbloodRouter = require('./routes/bloodReciever');
+const appointmentformRouter = require('./routes/appointmentform');
+const homeserviceRouter = require('./routes/homeService');
 const app = express();
 
 // view engine setup
@@ -35,6 +37,8 @@ app.use('/labortaryreports', reportUploadRouter);
 app.use('/donateBlood',donateBlood);
 app.use('/location',locationRouter);
 app.use('/requestBlood',requestbloodRouter);
+app.use('/appointment',appointmentformRouter);
+app.use('/homeService',homeserviceRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
