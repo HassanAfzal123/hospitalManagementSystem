@@ -12,6 +12,13 @@ body {
 	font-size: 300;
 	font-size: 16px;
 }
+label{
+    color:#000;   
+}
+.signup{
+    color:#000;
+    text-align: center;
+}
 ol, ul {
 	list-style: none;
 }
@@ -107,6 +114,12 @@ banner
 }
 .navbar-default2 .navbar-brand2, .navbar-default2 .navbar-brand2:hover, .navbar-default2 .navbar-brand2:focus {
     color: #EA6045;
+}
+.signupform {
+    color: #EA6045;
+    padding:50px;
+    border-width: 3px;
+    background: whitesmoke
 }
 @media (max-width: 768px) {
 	.navbar-collapse {
