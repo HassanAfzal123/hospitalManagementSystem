@@ -5,6 +5,7 @@ const logger = require('morgan');
 const hbs = require('express-handlebars');
 const passport = require('passport');
 const ejs = require('ejs');
+const session = require('express-session');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -30,6 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 //app.use(session({ secret: "cats" }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(session({secret: "asdsadasdsadasdas", resave: false, saveUninitialized: false, cookie: { maxAge: 60000 * 10} }));
 require('./Passport/passport')(passport); 
 
 app.use('/home', indexRouter);

@@ -5,8 +5,14 @@ var bodyParser = require('body-parser');
 router.use(bodyParser.json());
 router.use(express.static(path.join(__dirname,'../','public')));
 /* GET users listing. */
-router.get('/appointment', function(req, res, next) {
-  res.sendFile(path.join(__dirname,'../','Views/appointment.html'));
+router.get('/home', function(req, res, next) {
+  if(req.session.user) {
+      res.send("Welcome to Home Screen");
+  }
+  else
+  {
+    res.send("You are not logged in!");
+  }
 });
 
 module.exports = router;
