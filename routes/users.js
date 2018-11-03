@@ -7,12 +7,21 @@ router.use(express.static(path.join(__dirname,'../','public')));
 /* GET users listing. */
 router.get('/home', function(req, res, next) {
   if(req.session.user) {
-      res.send("Welcome to Home Screen");
+          res.render(path.join(__dirname,'../','Views/layouts/dashboard'));
   }
   else
   {
     res.send("You are not logged in!");
   }
 });
+router.get('/reports', function (req,res,next) {
+    if(req.session.user) {
+        res.sendFile(path.join(__dirname,'../','Views/tables.html'));
+    }
+    else
+    {
+        res.send("You are not logged in!");
+    }
 
+});
 module.exports = router;
