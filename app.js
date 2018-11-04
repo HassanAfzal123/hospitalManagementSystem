@@ -6,6 +6,7 @@ const hbs = require('express-handlebars');
 const passport = require('passport');
 const ejs = require('ejs');
 const session = require('express-session');
+const cors = require('cors')
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -24,6 +25,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set('view engine', 'hbs');
 
+app.use(cors())
 app.use(express.static('public'));
 app.use(logger('dev'));
 app.use(express.json());

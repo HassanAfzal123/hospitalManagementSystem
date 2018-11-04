@@ -116,10 +116,16 @@ banner
     color: #EA6045;
 }
 .signupform {
-    color: #EA6045;
     padding:50px;
-    border-width: 3px;
-    background: whitesmoke
+    background: whitesmoke;
+    margin:30px;
+}
+.loginform{
+    padding-top:30px;
+    padding-bottom:30px;
+    background: whitesmoke;
+    margin: 50px;
+
 }
 @media (max-width: 768px) {
 	.navbar-collapse {

@@ -9,8 +9,8 @@
   <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
-  <link href="/css/login.css" rel="stylesheet">
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -23,7 +23,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/home">Home</a>
+          <a class="nav-link" href="/home">HOME</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">DISEASE LOOKUP</a>
@@ -43,35 +43,32 @@
       <strong>Error!</strong> <%- JSON.stringify(info) %>
     </div>
   <% } %>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center">Sign In</h5>
-            <form class="form-signin" action="/login/signin" method="post">
-              <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
-              </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-              </div>
-
-              <div class="custom-control custom-checkbox mb-3">
-                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">Remember password</label>
-              </div>
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign In</button>
-              <hr class="my-4">
-            </form>
-            <a href="/login/signup" class="btn btn-lg btn-success btn-block text-uppercase">Sign Up</a>
-          </div>
-        </div>
-      </div>
+  <% if (success) { %>
+    <div class="alert alert-success alert-dismissible">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Success!</strong> <%- JSON.stringify(success) %>
     </div>
-  </div>     
+  <% } %>
+  <div class="loginform">
+      <div class="container">
+          <form  action="/login/signin" method="post">
+            <h1 class="text-center">LOGIN</h1>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control col-md-10" name="email" id="email" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+                <input type="password" class="form-control col-md-10" name="password" id="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          </br>
+          <h6>Forgot <a href="# ">Username/Password</a> ?</h6>
+          </br>
+          <h6>Don't have an account? <a href="/login/signup">Sign up</a></h6>
+      </div>
+  </div>    
   <!--footer-->
   <footer id="footer" class="footer-loginpage">
     <div class="footer-line">
