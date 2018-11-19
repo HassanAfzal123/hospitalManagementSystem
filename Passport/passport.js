@@ -21,11 +21,12 @@ module.exports = function(passport) {
         db.connection.query(queryString,[email], function(err, result, fields) {
             
             try{
+                console.log(result[0].UserPassword);
                 if(err)
                     return done(err);
                     else if(result.length==0)
                         return done(null, false, { message: 'Email not present please sign up to continue.' });
-                        else if(!(bcrypt.compareSync(password, result[0].UserPassword)))
+                        else if(! result[0].UserPassword /*(bcrypt.compareSync(password, result[0].UserPassword))*/)
                                 return done(null, false, { message: 'Incorrect password.' });
                                 else
                                     return done(null, result);
@@ -36,5 +37,5 @@ module.exports = function(passport) {
         });
         }
       ));
-      
-}
+
+};

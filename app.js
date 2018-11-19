@@ -6,7 +6,7 @@ const hbs = require('express-handlebars');
 const passport = require('passport');
 const ejs = require('ejs');
 const session = require('express-session');
-const cors = require('cors')
+const cors = require('cors');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');

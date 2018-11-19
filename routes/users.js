@@ -7,7 +7,7 @@ router.use(express.static(path.join(__dirname,'../','public')));
 /* GET users listing. */
 router.get('/home', function(req, res, next) {
   if(req.session.user) {
-          res.render(path.join(__dirname,'../','Views/layouts/dashboard'));
+          res.render(path.join(__dirname,'../','Views/userhome.ejs'));
   }
   else
   {
