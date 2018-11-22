@@ -21,7 +21,6 @@ module.exports = function(passport) {
         db.connection.query(queryString,[email], function(err, result, fields) {
             
             try{
-                console.log(result[0].UserPassword);
                 if(err)
                     return done(err);
                     else if(result.length==0)

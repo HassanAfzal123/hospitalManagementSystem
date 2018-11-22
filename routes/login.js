@@ -19,7 +19,7 @@ router.post('/signin', function(req, res, next) {
 			res.render(path.join(__dirname,'../','Views/login.ejs'));
         }
         if (user) {
-        	req.session.user = user;
+        	req.session.user = req.body.email;
 			res.redirect('/user/home');
         } else {
 			res.locals.info = info.message;
