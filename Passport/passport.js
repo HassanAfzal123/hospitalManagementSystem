@@ -25,7 +25,7 @@ module.exports = function(passport) {
                     return done(err);
                     else if(result.length==0)
                         return done(null, false, { message: 'Email not present please sign up to continue.' });
-                        else if(! result[0].UserPassword /*(bcrypt.compareSync(password, result[0].UserPassword))*/)
+                        else if(! (bcrypt.compareSync(password, result[0].UserPassword)))
                                 return done(null, false, { message: 'Incorrect password.' });
                                 else
                                     return done(null, result);
