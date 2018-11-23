@@ -17,15 +17,14 @@ module.exports = function(passport) {
         usernameField: 'email',
         passwordField: 'password'},
         (email, password, done)=> {
-        let queryString = 'SELECT UserPassword FROM UserInfo where email = ?';
+        let queryString = 'SELECT password FROM USER_INFO where email = ?';
         db.connection.query(queryString,[email], function(err, result, fields) {
-            
             try{
                 if(err)
                     return done(err);
                     else if(result.length==0)
                         return done(null, false, { message: 'Email not present please sign up to continue.' });
-                        else if(! (bcrypt.compareSync(password, result[0].UserPassword)))
+                        else if(!(bcrypt.compareSync(password, result[0].password)))
                                 return done(null, false, { message: 'Incorrect password.' });
                                 else
                                     return done(null, result);

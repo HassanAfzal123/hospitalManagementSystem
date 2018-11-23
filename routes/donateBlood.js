@@ -4,7 +4,12 @@ const db = require('../database');
 const router = express.Router();
 router.use(express.static(path.join(__dirname,'../','public')));
 router.get('/', function(req, res) {
+    if(req.session.user){
     res.sendFile(path.join(__dirname,'../','Views/donateBlood.html'));
+    }
+    else{
+        res.send("You are not logged in!");
+    }
 });
 router.post('/submitForm',function(req,res){
     var donorname = req.body.donorname;

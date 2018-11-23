@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
     res.render(path.join(__dirname,'../','Views/login.ejs'));
 });
 router.post('/signin', function(req, res, next) {
+	let userid;
 	passport.authenticate("local", function(err, user, info) {
         if (err) {
 			res.locals.info = "Error logging in.";
@@ -19,8 +20,16 @@ router.post('/signin', function(req, res, next) {
 			res.render(path.join(__dirname,'../','Views/login.ejs'));
         }
         if (user) {
-        	req.session.user = req.body.email;
-			res.redirect('/user/home');
+        	let queryString = "SELECT info_id from USER_INFO where email = ?";
+        	db.connection.query(queryString,[req.body.email],function (err,result,fields) {
+				if(err){
+					res.send("No such user found");
+				}
+				else{
+                    req.session.user = result[0].info_id;
+                    res.redirect('/user/home');
+				}
+            });
         } else {
 			res.locals.info = info.message;
 			res.locals.success=null;
@@ -70,11 +79,13 @@ router.post('/signup',function(req,res,next){
                         USER_INFO_info_id: id
                     };
                     db.connection.query(queryString2, [obj2], function (err2, rows, fields) {
-                        if (err2.errno == 1062) {
+                    	if(err){
+                      	  if (err2.errno === 1062) {
                             res.locals.info = "Contact number already exists";
                             res.locals.success = null;
                             res.render(path.join(__dirname, '../', 'Views/login.ejs'));
                         }
+                    	}
 
                         if (!(err1 && err2)) {
                             res.locals.success = "User successfully created Please sign in to continue";
