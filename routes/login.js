@@ -7,9 +7,14 @@ const bcrypt =  require('bcryptjs');
 router.use(express.static(path.join(__dirname,'../','public')));
 /* GET login page.*/
 router.get('/', function(req, res, next) {
-	res.locals.info = null;
-	res.locals.success=null;
-    res.render(path.join(__dirname,'../','Views/login.ejs'));
+    if(!req.session.user) {
+        res.locals.info = null;
+        res.locals.success = null;
+        res.render(path.join(__dirname, '../', 'Views/login.ejs'));
+    }
+    else{
+        res.redirect('/user/home');
+    }
 });
 router.post('/signin', function(req, res, next) {
 	let userid;

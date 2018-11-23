@@ -24,4 +24,11 @@ router.get('/reports', function (req,res,next) {
     }
 
 });
+router.get('/logout', function(req, res, next) {
+        req.session.destroy();
+    res.locals.info = null;
+    res.locals.success=null;
+        res.render(path.join(__dirname,'../','Views/login.ejs'));
+
+});
 module.exports = router;
