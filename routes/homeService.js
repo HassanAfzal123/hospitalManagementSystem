@@ -6,18 +6,33 @@ const router = express.Router();
 router.use(express.static(path.join(__dirname,'../','public')));
 
 router.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname,'../','Views/homeservice.html'));
+    if(req.session.user) {
+        res.render(path.join(__dirname,'../','Views/layouts/HomeService.hbs'));
+    }
+    else{
+        res.send("Please login first !!");
+    }
 });
 router.post('/submit', function(req, res) {
-
-    var queryString="INSERT INTO homeservicereq SET ?";
-    var valuesarr = {fname: req.body.h_fname, lname: req.body.h_lname, email: req.body.h_email,city: req.body.h_city,address1: req.body.h_address1, address2: req.body.h_address2,state: req.body.h_state, contact: req.body.h_contact};
-    db.connection.query(queryString,[valuesarr],function(err, rows, fields) {
-        if(err){
-            res.send("Wrong info provided");
-        }
-        res.send("Your information has been submitted successfully. You will be contacted very soon.");
-    });
+    if(req.session.user) {
+        var queryString = "INSERT INTO HOME_SERVICE SET ?";
+        var valuesarr = {
+            description: req.body.descriptionbox,
+            PATIENT_patient_id: req.session.user
+        };
+        db.connection.query(queryString,[valuesarr], function (err) {
+            if (err) {
+                console.log(err);
+                res.send("You have already requested for Home Service. You can view it in your profile overview");
+            }
+            else {
+                res.send("Your information has been submitted successfully. You will be contacted very soon.");
+            }
+        });
+    }
+    else{
+        res.send("You are not logged in !");
+    }
 });
 
 module.exports = router;

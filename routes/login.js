@@ -20,13 +20,13 @@ router.post('/signin', function(req, res, next) {
 			res.render(path.join(__dirname,'../','Views/login.ejs'));
         }
         if (user) {
-        	let queryString = "SELECT info_id from USER_INFO where email = ?";
+        	let queryString = "SELECT patient_id from PATIENT P,USER_INFO U where U.info_id = P.USER_INFO_info_id AND U.email = ?";
         	db.connection.query(queryString,[req.body.email],function (err,result,fields) {
 				if(err){
 					res.send("No such user found");
 				}
 				else{
-                    req.session.user = result[0].info_id;
+                    req.session.user = result[0].patient_id;
                     res.redirect('/user/home');
 				}
             });

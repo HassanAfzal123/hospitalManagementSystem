@@ -4,11 +4,11 @@ const db = require('../database');
 const router = express.Router();
 router.use(express.static(path.join(__dirname,'../','public')));
 router.get('/', function(req, res) {
-    if(req.session.user){
-    res.sendFile(path.join(__dirname,'../','Views/donateBlood.html'));
+    if(req.session.user) {
+        res.render(path.join(__dirname,'../','Views/layouts/donateblood.hbs'));
     }
     else{
-        res.send("You are not logged in!");
+        res.send("Please login first !!");
     }
 });
 router.post('/submitForm',function(req,res){

@@ -45,8 +45,8 @@
 
       <!-- Sidebar -->
       <ul class="sidebar navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">
+        <li class="nav-item">
+          <a class="nav-link" href="/user/home">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
           </a>
@@ -57,7 +57,7 @@
                   <span>Donate Blood</span>
               </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
               <a class="nav-link" href="/homeService">
                   <i class="fas fa-fw fa-tachometer-alt"></i>
                   <span>Home Service</span>
@@ -74,9 +74,16 @@
             <li class="breadcrumb-item">
               <a href="#">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">Overview</li>
+            <li class="breadcrumb-item active">HomeService</li>
           </ol>
 
+            <form method="post" action="/homeService/submit">
+                <div class="form-group">
+                    <label for="descriptionbox">Add description</label>
+                    <textarea class="form-control" name="descriptionbox" id="descriptionbox" placeholder="Enter What do you need. MaxSize:100 words" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
