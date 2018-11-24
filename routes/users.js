@@ -2,12 +2,23 @@ var express = require('express');
 var path = require('path');
 var router = express.Router();
 var bodyParser = require('body-parser');
+const db = require('../database');
 router.use(bodyParser.json());
 router.use(express.static(path.join(__dirname,'../','public')));
 /* GET users listing. */
 router.get('/home', function(req, res, next) {
+    let queryString = "SELECT P.first_name,P.last_name,P.gender,P.address,P.cell_no,U.email from PATIENT P,USER_INFO U where U.info_id = P.USER_INFO_info_id AND patient_id = ?";
   if(req.session.user) {
-      res.render(path.join(__dirname,'../','Views/layouts/dashboard.hbs'));
+      db.connection.query(queryString,[req.session.user],function (err,result,fields) {
+          if(err){
+              throw err;
+          }
+          else {
+              console.log(result[0]);
+              res.render(path.join(__dirname,'../','Views/layouts/dashboard.hbs'),{user: result[0]});
+          }
+      });
+
   }
   else
   {
