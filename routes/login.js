@@ -54,63 +54,82 @@ router.post('/signup',function(req,res,next){
 	let email = req.body.email;
 	let queryString1 = " Insert into USER_INFO set ?";
 	let queryString2 = " Insert into PATIENT set ?";
-	db.connection.query(queryString1,[obj1], function(err1, rows1, fields1) {
+	db.connection.beginTransaction(function(error) {
+        if(error) throw error;
 
-		if(err1) {
+        db.connection.query(queryString1, [obj1], function (err1, rows1, fields1) {
+            if (err1) {
+                return db.connection.rollback(function() {
 
-            if (err1.errno == 1062) {
-                res.locals.info = "User email already exists";
-                res.locals.success = null;
-                res.render(path.join(__dirname, '../', 'Views/login.ejs'));
+                    if (err1.errno == 1062) {
+                        res.locals.info = "User email already exists";
+                        res.locals.success = null;
+                        res.render(path.join(__dirname, '../', 'Views/login.ejs'));
+                    }
+                });
             }
-        }
-		else {
+            else {
 
-            let queryString3 = "SELECT info_id from USER_INFO where email = ?";
+                let queryString3 = "SELECT info_id from USER_INFO where email = ?";
 
-            db.connection.query(queryString3, [email], function (err, result) {
-            	if (err) {
-                    throw err;
-                }
-                else {
+                db.connection.query(queryString3, [email], function (err, result) {
+                    if (err) {
+                        return db.connection.rollback(function(){
+                            throw err;
+                        });
+                    }
+                    else {
 
-                    id = result[0].info_id;
-                    obj2 = {
-                        first_name: req.body.Fname,
-                        last_name: req.body.Lname,
-                        address: req.body.Address,
-                        cell_no: req.body.CellNo,
-                        gender: req.body.gender,
-                        USER_INFO_info_id: id
-                    };
-                    db.connection.query(queryString2, [obj2], function (err2, rows, fields) {
-                    	if(err){
-                      	  if (err2.errno === 1062) {
-                            res.locals.info = "Contact number already exists";
-                            res.locals.success = null;
-                            res.render(path.join(__dirname, '../', 'Views/login.ejs'));
-                        }
-                    	}
+                        id = result[0].info_id;
+                        obj2 = {
+                            first_name: req.body.Fname,
+                            last_name: req.body.Lname,
+                            address: req.body.Address,
+                            cell_no: req.body.CellNo,
+                            gender: req.body.gender,
+                            USER_INFO_info_id: id
+                        };
+                        db.connection.query(queryString2, [obj2], function (err2, rows, fields) {
+                            if (err2) {
+                                db.connection.rollback(function () {
 
-                        if (!(err1 && err2)) {
-                            res.locals.success = "User successfully created Please sign in to continue";
-                            res.locals.info = null;
-                            res.render(path.join(__dirname, '../', 'Views/login.ejs'))
-                        }
+                                    if (err2.errno === 1062) {
+                                        res.locals.info = "Contact number already exists";
+                                        res.locals.success = null;
+                                        res.render(path.join(__dirname, '../', 'Views/login.ejs'));
+                                    }
+                                });
+                            }
 
-                        else {
+                            else if (!(err1 && err2)) {
+                                db.connection.commit(function (rollback_err) {
+                                    if(rollback_err) {
+                                        return db.connection.rollback(function () {
 
-                            res.locals.info = "Error creating user";
-                            res.locals.success=null;
-                            res.render(path.join(__dirname, '../', 'Views/login.ejs'));
+                                            throw rollback_err;
+                                        });
+                                    }
+                                    else {
+                                        res.locals.success = "User successfully created Please sign in to continue";
+                                        res.locals.info = null;
+                                        res.render(path.join(__dirname, '../', 'Views/login.ejs'))
+                                    }
+                                });
+                            }
 
-                        }
-                    });
-                }
-            });
+                            else {
 
-        }
+                                res.locals.info = "Error creating user";
+                                res.locals.success = null;
+                                res.render(path.join(__dirname, '../', 'Views/login.ejs'));
+
+                            }
+                        });
+                    }
+                });
+
+            }
+        });
     });
-
 });
 module.exports = router;
