@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hospital</title>
+  <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+  <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="60">
+  <!--banner-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Hospital Name</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+      </ul>
+    </div>
+  </nav>
+  <% if (info) { %>
+    <div class="alert alert-danger alert-dismissible">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Error!</strong> <%- JSON.stringify(info) %>
+    </div>
+  <% } %>
+  <% if (success) { %>
+    <div class="alert alert-success alert-dismissible">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Success!</strong> <%- JSON.stringify(success) %>
+    </div>
+  <% } %>
+  <div class="loginform">
+      <div class="container">
+          <form  action="/login/signin" method="post">
+            <h1 class="text-center">LOGIN</h1>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control col-md-10" name="email" id="email" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+                <input type="password" class="form-control col-md-10" name="password" id="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          </br>
+          <h6>Forgot <a href="# ">Username/Password</a> ?</h6>
+          </br>
+      </div>
+  </div>    
+  <!--footer-->
+  <footer id="footer" class="footer-loginpage">
+    <div class="footer-line">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            © Copyright 2018. All Rights Reserved
+            <div class="credits">
+              Designed by <a href="#">SelfMade.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!--/ footer-->
+  <script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -9,6 +9,7 @@ const session = require('express-session');
 const cors = require('cors');
 
 const indexRouter = require('./routes/index');
+const admin = require('./routes/admin');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const donateBlood = require('./routes/donateBlood');
@@ -45,6 +46,7 @@ app.use('/location',locationRouter);
 app.use('/requestBlood',requestbloodRouter);
 app.use('/appointment',appointmentformRouter);
 app.use('/homeService',homeserviceRouter);
+app.use('/admin',admin);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
