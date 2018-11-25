@@ -3,6 +3,7 @@ var path = require('path');
 var router = express.Router();
 var bodyParser = require('body-parser');
 const db = require('../database');
+const bcrypt = require('bcryptjs');
 router.use(bodyParser.json());
 router.use(express.static(path.join(__dirname,'../','public')));
 /* GET users listing. */
@@ -58,6 +59,28 @@ router.post('/update', function (req,res,next) {
                res.redirect('/user/home');
 
            }
+        });
+    }
+});
+router.post('/changepass', function (req,res,next) {
+    if(req.session.user){
+        var hash = bcrypt.hashSync(req.body.newPassword,1);
+        let queryString = "UPDATE USER_INFO SET ? where info_id = (SELECT USER_INFO_info_id FROM PATIENT where patient_id = ?)";
+        let newUser_Pass = {password: hash};
+        console.log(newUser_Pass);
+        db.connection.query(queryString,[newUser_Pass,req.session.user],function(err2,rows,fields) {
+            req.session.destroy();
+            if(err2){
+                res.locals.info = "Password wasn't updated successfully, kindly use your old password for login.";
+                res.locals.success = null;
+                res.render(path.join(__dirname, '../', 'Views/login.ejs'));
+            }
+            else {
+                res.locals.info = null;
+                res.locals.success = "Password Updated Successfully. You can now login with your new password !";
+                res.render(path.join(__dirname, '../', 'Views/login.ejs'));
+
+            }
         });
     }
 });
