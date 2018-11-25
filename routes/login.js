@@ -31,6 +31,7 @@ router.post('/signin', function(req, res, next) {
 					res.send("No such user found");
 				}
 				else{
+				    console.log(result[0]);
                     req.session.user = result[0].patient_id;
                     res.redirect('/user/home');
 				}

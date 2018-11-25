@@ -9,8 +9,8 @@ router.use(express.static(path.join(__dirname,'../','public')));
 /* GET users listing. */
 router.get('/home', function(req, res, next) {
 
-    let queryString = "SELECT P.first_name,P.last_name,P.gender,P.address,P.cell_no,U.email from PATIENT P,USER_INFO U where U.info_id = P.USER_INFO_info_id AND patient_id = ?";
   if(req.session.user) {
+      let queryString = "SELECT P.first_name,P.last_name,P.gender,P.address,P.cell_no,U.email from PATIENT P,USER_INFO U where U.info_id = P.USER_INFO_info_id AND patient_id = ?";
       db.connection.query(queryString,[req.session.user],function (err,result,fields) {
           if(err){
               throw err;

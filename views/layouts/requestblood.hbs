@@ -51,9 +51,9 @@
           </a>
         </li>
           <li class="nav-item active">
-              <a class="nav-link" href="/donateBlood">
+              <a class="nav-link" href="/requestBlood">
                   <i class="fas fa-fw fa-tachometer-alt"></i>
-                  <span>Donate Blood</span>
+                  <span>Request Blood</span>
               </a>
           </li>
           <li class="nav-item">
@@ -73,28 +73,10 @@
             <li class="breadcrumb-item">
               <a href="#">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">DonateBlood</li>
+            <li class="breadcrumb-item active">RequestBlood</li>
           </ol>
 
-            <form class="container" method="post" action="/donateBlood/submitForm">
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="form-labletext" for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="donorname" placeholder="Enter name">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="form-labletext" for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="donoremail" placeholder="Enter email">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="form-labletext" for="contact">Contact</label>
-                        <input type="text" class="form-control" id="contact" name="donorcontact" placeholder="Contact Number">
-                    </div>
-                </div>
+            <form class="container" method="post" action="/requestBlood/submitForm">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="form-labletext" for="bloodGroup">Blood Group</label>

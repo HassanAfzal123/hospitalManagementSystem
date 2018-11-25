@@ -47,12 +47,12 @@
 
         {{#each objects as |val key|}}
 
-                    <div class="card col-md-3 wow lightSpeedIn">
+                    <div class="card col-md-3">
                         <div class="box">
                             <div class="img">
                                 <img src="/img/donor.jpg">
                             </div>
-                            <h2>{{val.name}}<br><span>Group: {{val.blood}}<br></span></h2>
+                            <h2>{{val.first_name}} {{val.last_name}}<br><span>Group: {{val.blood}}<br></span></h2>
                             <p></p><button type="button" class="btn button-showdetails" data-toggle="collapse" data-target="#demo{{key}}">Show Details</button>
                                 <div id="demo{{key}}" class="collapse out">
                                     <h2><span>{{val.email}}<br>{{val.number}}</span></h2>
