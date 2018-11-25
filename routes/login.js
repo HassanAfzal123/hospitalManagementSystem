@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
     if(!req.session.user) {
         res.locals.info = null;
         res.locals.success = null;
-        res.render(path.join(__dirname, '../', 'Views/login.ejs'));
+        res.render(path.join(__dirname, '../', 'views/login.ejs'));
     }
     else{
         res.redirect('/user/home');
@@ -22,7 +22,7 @@ router.post('/signin', function(req, res, next) {
         if (err) {
 			res.locals.info = "Error logging in.";
 			res.locals.success=null;
-			res.render(path.join(__dirname,'../','Views/login.ejs'));
+			res.render(path.join(__dirname,'../','views/login.ejs'));
         }
         if (user) {
         	let queryString = "SELECT patient_id from PATIENT P,USER_INFO U where U.info_id = P.USER_INFO_info_id AND U.email = ?";
@@ -38,13 +38,13 @@ router.post('/signin', function(req, res, next) {
         } else {
 			res.locals.info = info.message;
 			res.locals.success=null;
-		  	res.render(path.join(__dirname,'../','Views/login.ejs'));
+		  	res.render(path.join(__dirname,'../','views/login.ejs'));
         }
       })(req, res,next);
 }) ;
 router.get('/signup',function(req,res,next){
 	res.locals.info=null;
-	res.render(path.join(__dirname,'../','Views/signup.ejs'));
+	res.render(path.join(__dirname,'../','views/signup.ejs'));
 });
 router.post('/signup',function(req,res,next){
 	var hash = bcrypt.hashSync(req.body.password,1);
@@ -64,7 +64,7 @@ router.post('/signup',function(req,res,next){
                     if (err1.errno == 1062) {
                         res.locals.info = "User email already exists";
                         res.locals.success = null;
-                        res.render(path.join(__dirname, '../', 'Views/login.ejs'));
+                        res.render(path.join(__dirname, '../', 'views/login.ejs'));
                     }
                 });
             }
@@ -96,7 +96,7 @@ router.post('/signup',function(req,res,next){
                                     if (err2.errno === 1062) {
                                         res.locals.info = "Contact number already exists";
                                         res.locals.success = null;
-                                        res.render(path.join(__dirname, '../', 'Views/login.ejs'));
+                                        res.render(path.join(__dirname, '../', 'views/login.ejs'));
                                     }
                                 });
                             }
@@ -112,7 +112,7 @@ router.post('/signup',function(req,res,next){
                                     else {
                                         res.locals.success = "User successfully created Please sign in to continue";
                                         res.locals.info = null;
-                                        res.render(path.join(__dirname, '../', 'Views/login.ejs'))
+                                        res.render(path.join(__dirname, '../', 'views/login.ejs'))
                                     }
                                 });
                             }
@@ -121,7 +121,7 @@ router.post('/signup',function(req,res,next){
 
                                 res.locals.info = "Error creating user";
                                 res.locals.success = null;
-                                res.render(path.join(__dirname, '../', 'Views/login.ejs'));
+                                res.render(path.join(__dirname, '../', 'views/login.ejs'));
 
                             }
                         });

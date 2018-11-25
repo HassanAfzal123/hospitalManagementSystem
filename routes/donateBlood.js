@@ -5,7 +5,7 @@ const router = express.Router();
 router.use(express.static(path.join(__dirname,'../','public')));
 router.get('/', function(req, res) {
     if(req.session.user) {
-        res.render(path.join(__dirname,'../','Views/layouts/donateblood.hbs'));
+        res.render(path.join(__dirname,'../','views/layouts/donateblood.hbs'));
     }
     else{
         res.send("Please login first !!");

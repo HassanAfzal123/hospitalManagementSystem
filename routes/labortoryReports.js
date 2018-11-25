@@ -8,7 +8,7 @@ const router = express.Router();
 router.use(express.static(path.join(__dirname,'../','public')));
 /* GET ADD Labortary Reports page.*/
 router.get('/', function(req, res, next) {
-    res.sendFile(path.join(__dirname,'../','Views/labortaryreports.html'));
+    res.sendFile(path.join(__dirname,'../','views/labortaryreports.html'));
 });
 
 var storage = multer.diskStorage(

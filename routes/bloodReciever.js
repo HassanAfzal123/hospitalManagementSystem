@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
         for(var i=0;i<rows.length;i++){
             obj[i]={name: rows[i].donorname,number: rows[i].donornumber,email: rows[i].donoremail,blood: rows[i].bloodgroup};
         }
-        res.render(path.join(__dirname,'../','Views/layouts/RequestBlood'),{objects: obj});
+        res.render(path.join(__dirname,'../','views/layouts/RequestBlood'),{objects: obj});
     });
 });
 

@@ -15,7 +15,7 @@ router.get('/home', function(req, res, next) {
           }
           else {
               console.log(result[0]);
-              res.render(path.join(__dirname,'../','Views/layouts/dashboard.hbs'),{user: result[0]});
+              res.render(path.join(__dirname,'../','views/layouts/dashboard.hbs'),{user: result[0]});
           }
       });
 
@@ -27,7 +27,7 @@ router.get('/home', function(req, res, next) {
 });
 router.get('/reports', function (req,res,next) {
     if(req.session.user) {
-        res.sendFile(path.join(__dirname,'../','Views/tables.html'));
+        res.sendFile(path.join(__dirname,'../','views/tables.html'));
     }
     else
     {
@@ -39,7 +39,7 @@ router.get('/logout', function(req, res, next) {
         req.session.destroy();
     res.locals.info = null;
     res.locals.success=null;
-        res.render(path.join(__dirname,'../','Views/login.ejs'));
+        res.render(path.join(__dirname,'../','views/login.ejs'));
 
 });
 module.exports = router;

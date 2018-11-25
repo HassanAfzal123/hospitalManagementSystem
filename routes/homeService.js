@@ -7,7 +7,7 @@ router.use(express.static(path.join(__dirname,'../','public')));
 
 router.get('/', function(req, res) {
     if(req.session.user) {
-        res.render(path.join(__dirname,'../','Views/layouts/HomeService.hbs'));
+        res.render(path.join(__dirname,'../','views/layouts/HomeService.hbs'));
     }
     else{
         res.send("Please login first !!");

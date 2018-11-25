@@ -6,7 +6,7 @@ const router = express.Router();
 router.use(express.static(path.join(__dirname,'../','public')));
 
 router.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname,'../','Views/appointment.html'));
+    res.sendFile(path.join(__dirname,'../','views/appointment.html'));
 });
 router.post('/submit', function(req, res) {
 

@@ -6,7 +6,7 @@ const router = express.Router();
 router.use(express.static(path.join(__dirname,'../','public')));
 /* GET home page.*/
 router.get('/', function(req, res, next) {
-  res.sendFile(path.join(__dirname,'../','Views/index.html'));
+  res.sendFile(path.join(__dirname,'../','views/index.html'));
 });
 router.post('/getreport', function(req, res, next) {
     var reportid = req.body.reportid;
