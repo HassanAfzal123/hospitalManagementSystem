@@ -10,7 +10,9 @@ router.get('/', function(req, res) {
         res.render(path.join(__dirname,'../','views/layouts/HomeService.hbs'));
     }
     else{
-        res.send("Please login first !!");
+        res.locals.info = "You need to login first!";
+        res.locals.success = null;
+        res.render(path.join(__dirname, '../', 'views/login.ejs'));
     }
 });
 router.post('/submit', function(req, res) {
