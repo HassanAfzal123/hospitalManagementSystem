@@ -30,12 +30,9 @@
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
       <a class="navbar-brand mr-1" href="#">Hospital LOGO</a>
-
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
       </button>
-
-
 
       <!-- Navbar Search -->
 
@@ -59,14 +56,14 @@
                   <span>Request Blood</span>
               </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
               <a class="nav-link" href="/homeService">
                   <i class="fas fa-fw fa-tachometer-alt"></i>
                   <span>Home Service</span>
               </a>
           </li>
-          <li class="nav-item">
-              <a class="nav-link" href="/appointment">
+          <li class="nav-item active">
+              <a class="nav-link" href="#">
                   <i class="fas fa-fw fa-tachometer-alt"></i>
                   <span>Make Appointment</span>
               </a>
@@ -82,17 +79,74 @@
             <li class="breadcrumb-item">
               <a href="#">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">HomeService</li>
+            <li class="breadcrumb-item active">Make Appointment</li>
           </ol>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
 
+                    <h4 class="text-center">Appointment Request</h4>
+                    <table class="table table-hover table-condensed table-bordered table-responsive-md">
+                        {{#each appointment_request}}
+                            <tr>
+                                {{#if @index}}
+                                {{else}}
+                                    <thead>
+                                    <td>#</td>
+                                    <td>Name</td>
+                                    <td>Number</td>
+                                    <td>Date</td>
+                                    <td>Time</td>
+                                    <td>Status</td>
+                                    </thead>
+                                {{/if}}
+                                <td><b>{{math @index "+" 1}}</b></td>
+                                <td><b>{{this.name}}</b></td>
+                                <td><b>{{this.number}}</b></td>
+                                <td><b>{{this.date}}</b></td>
+                                <td><b>{{this.time}}</b></td>
+                                {{#if this.showColor}}
+                                    <td style="color: red"><b>{{this.status}}</b></td>
+                                {{else}}
+                                    <td style="color: green"><b>{{this.status}}</b></td>
+                                {{/if}}
+                            </tr>
+                        {{/each}}
+                    </table>
 
-            <form method="post" action="/homeService/submit">
-                <div class="form-group">
-                    <label for="descriptionbox">Add description</label>
-                    <textarea class="form-control" name="descriptionbox" id="descriptionbox" placeholder="Enter What do you need. MaxSize:100 words" rows="3"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            </div>
+            <br>
+
+            <form class="container" method="post" action="/appointment/submit">
+                <div class="form-row">
+                     <div class="col-md-3"></div>
+                    <div class="form-group col-md-6">
+                        <label for="name" class="form-labletext">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Full Name" name="name" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-6">
+                        <label for="date" class="form-labletext">Appointment Date</label>
+                        <input type="date" class="form-control" id="date" name="date" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-6">
+                        <label for="time" class="form-labletext">Appointment Time</label>
+                        <input type="time" class="form-control" id="time" name="time" required>
+                    </div>
+                </div>
+                <div class='form-row'>
+                    <div class="col-md-4"></div>
+                    <button type="submit" class="btn btn-primary col-md-4">Submit</button>
+
+                </div>
+
+            </form><br>
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
@@ -109,7 +163,7 @@
 
     </div>
     <!-- /#wrapper -->
-
+    </div>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fas fa-angle-up"></i>
@@ -134,6 +188,7 @@
     <!-- Demo scripts for this page-->
     <script src="js/demo/datatables-demo.js"></script>
     <script src="js/demo/chart-area-demo.js"></script>
+
 
   </body>
 

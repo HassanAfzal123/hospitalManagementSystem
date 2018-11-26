@@ -11,8 +11,11 @@ router.get('/', function(req, res) {
         if (err) throw err;
 
         for(var i=0;i<request_blood_person.length;i++){
-            person_info[i]={first_name: request_blood_person[i].first_name,last_name: request_blood_person[i].last_name,blood: request_blood_person[i].BLOOD_GROUP,email: request_blood_person[i].email, number: request_blood_person[i].cell_no};
+
+                person_info[i]={first_name: request_blood_person[i].first_name,last_name: request_blood_person[i].last_name,blood: request_blood_person[i].BLOOD_GROUP,email: request_blood_person[i].email, number: request_blood_person[i].cell_no};
+
         }
+
         res.render(path.join(__dirname,'../','views/layouts/ShowBloodRequest.hbs'),{objects: person_info});
     });
 });

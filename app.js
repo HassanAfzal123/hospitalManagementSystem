@@ -21,7 +21,20 @@ const homeserviceRouter = require('./routes/homeService');
 const app = express();
 
 // view engine setup
-app.engine('hbs',hbs({extname: 'hbs', defaultLayout: 'main', layout: __dirname + '/views'}));
+app.engine('hbs',hbs({extname: 'hbs', defaultLayout: 'main', layout: __dirname + '/views',
+    helpers:{
+        // Function to do basic mathematical operation in handlebar
+        math: function(lvalue, operator, rvalue) {lvalue = parseFloat(lvalue);
+            rvalue = parseFloat(rvalue);
+            return {
+                "+": lvalue + rvalue,
+                "-": lvalue - rvalue,
+                "*": lvalue * rvalue,
+                "/": lvalue / rvalue,
+                "%": lvalue % rvalue
+            }[operator];
+        }
+    }}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set('view engine', 'hbs');
@@ -35,7 +48,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(session({secret: "asdsadasdsadasdas", resave: false, saveUninitialized: false, cookie: { maxAge: 60000 * 10} }));
-require('./Passport/passport')(passport); 
+require('./Passport/passport')(passport);
+
 
 app.use('/home', indexRouter);
 app.use('/user', usersRouter);
