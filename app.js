@@ -14,10 +14,11 @@ const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const donateBlood = require('./routes/ShowBloodReq');
 const locationRouter = require('./routes/location');
-const reportUploadRouter = require('./routes/labortoryReports');
 const requestbloodRouter = require('./routes/RequestBloodForm');
 const appointmentformRouter = require('./routes/appointmentform');
 const homeserviceRouter = require('./routes/homeService');
+const UserReportRouter = require('./routes/userlaboratoryreports');
+const StaffUploadReport = require('./routes/UploadReports');
 const app = express();
 
 // view engine setup
@@ -54,13 +55,14 @@ require('./Passport/passport')(passport);
 app.use('/home', indexRouter);
 app.use('/user', usersRouter);
 app.use('/login', loginRouter);
-app.use('/labortaryreports', reportUploadRouter);
 app.use('/donateBlood',donateBlood);
 app.use('/location',locationRouter);
 app.use('/requestBlood',requestbloodRouter);
 app.use('/appointment',appointmentformRouter);
 app.use('/homeService',homeserviceRouter);
+app.use('/reports',UserReportRouter);
 app.use('/admin',admin);
+app.use('/uploadreport',StaffUploadReport);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

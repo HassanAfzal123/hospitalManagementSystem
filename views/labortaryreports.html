@@ -47,23 +47,28 @@
         <div class="row">
           <div class="banner-info">
             <div class="makeppointment-text">Upload Report</div>
-            <form action="/labortaryreports/submit" enctype="multipart/form-data" method="post">
-              <div class="row">
-                <div class="col-md-4"></div>
-
-                <input class="labortareport-input col-md-3" type="text" name="reportidfield" placeholder=" Enter Report ID here" required>
+            <form action="/uploadreport/submit" enctype="multipart/form-data" method="post">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="patientid" class="form-labletext">Patient ID</label>
+                  <input type="text" class="form-control" id="patientid" name="patientid" required>
+                </div>
               </div>
-              <div class="row">
-                <div class="col-md-4"></div>
-                <input class="labortareport-input col-md-3" type="text" name="testName" placeholder=" Enter Test Name e.g: Malaria" required>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="testname" class="form-labletext">Test Name</label>
+                  <input type="text" class="form-control" id="testname" name="testname" required>
+                </div>
               </div>
-              <div class="row">
-                <div class="col-md-4"></div>
-              <input class="col-md-3 labortareport-input" type="file" name="uploadreport" multiple required>
-              </div>
-              <div class="row">
+              <div class="form-row">
+                <div class="form-group">
+              <input class="labortareport-input" type="file" name="uploadreport" multiple required>
+                </div>
+                </div>
+              <br>
+              <div class="form-row">
                 <div class="col-md-5"></div>
-              <input class="btn btn-primary buttons-margin col-md-1" type="submit" value="Upload">
+              <input class="btn btn-primary" type="submit" value="Upload">
               </div>
             </form>
           </div>
