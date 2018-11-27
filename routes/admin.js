@@ -43,7 +43,7 @@ router.post('/login', function (req, res, next) {
         }
     })(req, res, next);
 });
-router.post('/addAdmin', function (req, res, next) {
+router.post('/addAdmin', function (req, res) {
     var hash = bcrypt.hashSync(req.body.password, 1);
     let userInfo = { email: req.body.email, password: hash, USER_ROLE_role_id: 1 };
     let email = req.body.email;
@@ -55,14 +55,14 @@ router.post('/addAdmin', function (req, res, next) {
             if (err1) {
                 return db.connection.rollback(function () {
                     if (err1.errno == 1062) {
-                        res.locals.info = "Admin email already exists";
-                        res.locals.success = null;
+                        // res.locals.info = "Admin email already exists";
+                        // res.locals.success = null;
                         //res.render(path.join(__dirname, '../', 'views/login.ejs'));
                         res.send('cannot create admin');
                     }
                     else if (err2.errno === 1048) {
-                        res.locals.info = "All values are required";
-                        res.locals.success = null;
+                        // res.locals.info = "All values are required";
+                        // res.locals.success = null;
                         //res.render(path.join(__dirname, '../', 'views/login.ejs'));
                         res.send("All values are required");
                     }
@@ -72,7 +72,7 @@ router.post('/addAdmin', function (req, res, next) {
 
                 let selectUserInfo = "SELECT info_id from USER_INFO where email = ?";
 
-                db.connection.query(selectUserInfo, [email],(err, result) =>{
+                db.connection.query(selectUserInfo, [email], (err, result) => {
                     if (err) {
                         return db.connection.rollback(function () {
                             res.send("rollback");
@@ -88,42 +88,42 @@ router.post('/addAdmin', function (req, res, next) {
                             gender: req.body.gender,
                             USER_INFO_info_id: id
                         };
-                        db.connection.query(insertAdmin, [adminData], (err2, result)=>{
+                        db.connection.query(insertAdmin, [adminData], (err2, result) => {
                             if (err2) {
                                 db.connection.rollback(function () {
                                     if (err2.errno === 1062) {
-                                        res.locals.info = "Contact number already exists";
-                                        res.locals.success = null;
+                                        // res.locals.info = "Contact number already exists";
+                                        // res.locals.success = null;
                                         //res.render(path.join(__dirname, '../', 'views/login.ejs'));
                                         res.send("Contact number already exists");
                                     }
-                                    else if(err2.errno === 1048){
-                                        res.locals.info = "All values are required";
-                                        res.locals.success = null;
+                                    else if (err2.errno === 1048) {
+                                        // res.locals.info = "All values are required";
+                                        // res.locals.success = null;
                                         //res.render(path.join(__dirname, '../', 'views/login.ejs'));
                                         res.send("All values are required");
                                     }
-                                    else{
+                                    else {
                                         res.send("Error adding admin")
                                     }
                                 });
                             }
                             else if (!(err1 && err2)) {
-                                db.connection.commit((rollback_err)=> {
+                                db.connection.commit((rollback_err) => {
                                     if (rollback_err) {
                                         return db.connection.rollback(function () {
                                             //throw rollback_err;
-                                            console.log(rollback_err);
+                                            //console.log(rollback_err);
                                             res.send("Error creating admin");
                                         });
                                     }
                                     else {
-                                        res.locals.success = "User successfully created Please sign in to continue";
-                                        res.locals.info = null;
+                                        // res.locals.success = "User successfully created Please sign in to continue";
+                                        // res.locals.info = null;
                                         //res.render(path.join(__dirname, '../', 'views/login.ejs'))
                                         res.send("Admin successfully created Please sign in to continue")
                                     }
-                                });
+                                })
                             }
 
                             else {
@@ -140,7 +140,7 @@ router.post('/addAdmin', function (req, res, next) {
         })
     })
 });
-router.post('/addStaff', function (req, res, next) {
+router.post('/addStaff', function (req, res) {
     var hash = bcrypt.hashSync("password", 1);
     let userInfo = { email: req.body.email, password: hash, USER_ROLE_role_id: 1 };
     let email = req.body.email;
@@ -187,14 +187,14 @@ router.post('/addStaff', function (req, res, next) {
                             if (err2) {
                                 db.connection.rollback(function () {
                                     if (err2.errno === 1062) {
-                                        res.locals.info = "Contact number already exists";
-                                        res.locals.success = null;
+                                        // res.locals.info = "Contact number already exists";
+                                        // res.locals.success = null;
                                         //res.render(path.join(__dirname, '../', 'views/login.ejs'));
                                         res.send("Contact number already exists");
                                     }
                                     else if (err2.errno === 1048) {
-                                        res.locals.info = "All values are required";
-                                        res.locals.success = null;
+                                        // res.locals.info = "All values are required";
+                                        // res.locals.success = null;
                                         //res.render(path.join(__dirname, '../', 'views/login.ejs'));
                                         res.send("All values are required");
                                     }
@@ -209,8 +209,8 @@ router.post('/addStaff', function (req, res, next) {
                                         });
                                     }
                                     else {
-                                        res.locals.success = "Staff successfully created Please sign in to continue";
-                                        res.locals.info = null;
+                                        // res.locals.success = "Staff successfully created Please sign in to continue";
+                                        // res.locals.info = null;
                                         //res.render(path.join(__dirname, '../', 'views/login.ejs'))
                                         res.send("Staff successfully created Please sign in to continue")
                                     }
@@ -218,8 +218,8 @@ router.post('/addStaff', function (req, res, next) {
                             }
 
                             else {
-                                res.locals.info = "Error creating user";
-                                res.locals.success = null;
+                                // res.locals.info = "Error creating user";
+                                // res.locals.success = null;
                                 //res.render(path.join(__dirname, '../', 'views/login.ejs'));
                                 res.send("Error creating staff");
 
@@ -231,10 +231,10 @@ router.post('/addStaff', function (req, res, next) {
         })
     })
 });
-router.post("/addWard",(req,res,next)=>{
-    db.connection.beginTransaction( (error)=> {
-        if(error){
-
+router.post("/addWard", (req, res) => {
+    db.connection.beginTransaction((error) => {
+        if (error) {
+            res.send("error");
         }
         else {
             let wardData = {
@@ -245,35 +245,67 @@ router.post("/addWard",(req,res,next)=>{
             let insertWard = "Insert into WARD set ?";
             db.connection.query(insertWard, [wardData], (insertWardError) => {
                 if (insertWardError) {
-                    console.log(insertWardError)
-                    res.send("Insert ward error");
+                    return res.send("Insert ward error");
                 }
                 else {
                     let selectWardId = "Select ward_id from WARD where name = ?";
-                    db.connection.query(selectWardId, req.body.name, (selectWardError, result) => {
+                    db.connection.query(selectWardId, [req.body.name], (selectWardError, result) => {
                         if (selectWardError) {
                             return db.connection.rollback(function () {
-                                res.send("rollback");
+                                return res.send("rollback");
                             });
                         }
                         else {
-                            let id = result[0].wardId;
-                            let bedData = { WARDS_ward_id: id };
-                            for (let i = 0; i < req.body.bedCount; i++) {
+                            let bedData = { WARDS_ward_id: result[0].ward_id };
+                            let i = 0;
+                            set(0);
+                            function set(i) {
                                 let insertBed = "Insert into BED set ?";
                                 db.connection.query(insertBed, [bedData], (insertBedError, result) => {
-                                    if(insertBedError){
+                                    if (insertBedError) {
                                         return db.connection.rollback(function () {
-                                            res.send("rollback");
+                                            return res.send("rollback");
                                         });
                                     }
                                 })
+                                if (i < req.body.bedCount)
+                                    set(i + 1);
+                                else {
+                                    db.connection.commit((rollback_err) => {
+                                        if (rollback_err) {
+                                            return db.connection.rollback(function () {
+                                                res.send(rollback_err);
+                                            });
+                                        }
+                                        else {
+                                            // res.locals.success = "User successfully created Please sign in to continue";
+                                            // res.locals.info = null;
+                                            // res.render(path.join(__dirname, '../', 'views/login.ejs'))
+                                            res.send("success");
+                                        }
+                                    })
+                                }
                             }
-                            res.send()
                         }
                     })
                 }
             })
+        }
+    })
+});
+router.post("/addDisease", (req, res) => {
+    let disease = {
+        name :req.body.name,
+        details:req.body.symptomps,
+        symptoms:req.body.symptoms
+    };
+    let insertDisease="Insert into DISEASE set ?";
+    db.connection.query(insertDisease, [disease], (insertDiseaseError, result) => {
+        if(insertDiseaseError){
+            res.send("error");
+        }
+        else{
+            res.send("Successfully inserted");
         }
     })
 });
