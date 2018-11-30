@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hospital</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+      <a class="navbar-brand mr-1" href="#">Hospital LOGO</a>
+
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+        <div class="col-md-9"></div>
+            <a class="btn btn-dark text-right" href="#" data-toggle="modal" data-target="#logoutModal">Logout&nbsp&nbsp&nbsp<span class="fa fa-sign-out-alt"></span> </a>
+
+      <!-- Navbar Search -->
+
+      <!-- Navbar -->
+
+    </nav>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <ul class="sidebar navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/Staff/home">
+            <i class="fa fa-briefcase-medical"></i>
+            <span>&nbsp;Dashboard</span>
+          </a>
+        </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-fw fa-folder"></i>
+                  <span>&nbsp;Staff</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                  <a class="dropdown-item" href="/AddStaff"><i class="fa fa-briefcase-medical"></i>&nbsp; Add Staff</a>
+                  <a class="dropdown-item" href="/Liststaff"><i class="fa fa-briefcase-medical"></i>&nbsp; List Staff</a>
+              </div>
+          </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-fw fa-folder"></i>
+                  <span>&nbsp;Disease</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                  <a class="dropdown-item active" href="/AddDisease"><i class="fa fa-briefcase-medical"></i>&nbsp; Add Disease</a>
+                  <a class="dropdown-item" href="/ListDisease"><i class="fa fa-briefcase-medical"></i>&nbsp; List Disease</a>
+              </div>
+          </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-fw fa-folder"></i>
+                  <span>&nbsp;Medicine</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                  <a class="dropdown-item" href="/AddMedicine"><i class="fa fa-briefcase-medical"></i>&nbsp; Add Medicine</a>
+                  <a class="dropdown-item" href="/ListMedicine"><i class="fa fa-briefcase-medical"></i>&nbsp; List Medicine</a>
+              </div>
+          </li>
+
+      </ul>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="#">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Add Disease</li>
+          </ol>
+
+
+        <!-- /.container-fluid -->
+            <div class="text-center"><h3>Add Disease</h3></div>
+            <form class="container" method="post" action="/AddDisease">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-6">
+                        <label for="staff_name" class="form-labletext">Name</label>
+                        <input type="text" class="form-control" id="disease_name" placeholder="Disease Name" name="disease_name" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-6">
+                        <label for="Ddescriptionbox">Add description</label>
+                        <textarea class="form-control" name="Ddescriptionbox" id="Ddescriptionbox" placeholder="Enter Details. MaxSize:100 words" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-6">
+                        <label for="symptoms">Add Symptoms</label>
+                        <textarea class="form-control" name="symptoms" id="symptoms" placeholder="Enter Symptoms. MaxSize:100 words" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class="col-md-4"></div>
+                    <button type="submit" class="btn btn-primary col-md-4">Submit</button>
+                </div><br>
+
+            </form>
+            <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Your Website 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="logout">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- EDIT MODAL -->
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-window-close" aria-hidden="true"></span></button>
+                </div>
+                <form method="post" action="/Staff/update">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="newName">Name</label>
+                        <input class="form-control" name="newName" id="newName" type="text" value="{{staff.name}}" required>
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <button type="submit" class="btn btn-warning btn-lg" style="width: 100%"><span class="fa fa-check"></span> Update</button>
+                </div>
+                </form>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <!-- UPDATE PASSWORD MODAL -->
+    <div class="modal fade" id="ChangePassModal" tabindex="-1" role="dialog" aria-labelledby="changepass" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title custom_align" id="Heading">Change Password</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-window-close" aria-hidden="true"></span></button>
+                </div>
+                <form method="post" action="/Staff/changepass">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="newPassword">New Password</label>
+                            <input class="form-control" name="newPassword" id="newPassword" type="password" placeholder="e.g: asd123" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="submit" class="btn btn-warning btn-lg" style="width: 100%"><span class="fa fa-check"></span> Update</button>
+                    </div>
+                </form>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+
+    <!-- Demo scripts for this page-->
+    <script src="js/demo/datatables-demo.js"></script>
+    <script src="js/demo/chart-area-demo.js"></script>
+
+  </body>
+
+</html>

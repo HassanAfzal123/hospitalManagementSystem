@@ -19,6 +19,13 @@ const appointmentformRouter = require('./routes/appointmentform');
 const homeserviceRouter = require('./routes/homeService');
 const UserReportRouter = require('./routes/userlaboratoryreports');
 const StaffUploadReport = require('./routes/UploadReports');
+const StaffRouter = require('./routes/Staff');
+const AddStaffRouter = require('./routes/Addstaff');
+const ListStaffRouter = require('./routes/Liststaff');
+const AddDiseaseRouter = require('./routes/AddDisease');
+const ListDiseaseRouter = require('./routes/ListDisease');
+const AddMedicineRouter = require('./routes/AddMedicine');
+const ListMedicineRouter = require('./routes/ListMedicine');
 const app = express();
 
 // view engine setup
@@ -40,7 +47,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set('view engine', 'hbs');
 
-app.use(cors())
+app.use(cors());
 app.use(express.static('public'));
 app.use(logger('dev'));
 app.use(express.json());
@@ -63,6 +70,13 @@ app.use('/homeService',homeserviceRouter);
 app.use('/reports',UserReportRouter);
 app.use('/admin',admin);
 app.use('/uploadreport',StaffUploadReport);
+app.use('/staff',StaffRouter);
+app.use('/AddStaff',AddStaffRouter);
+app.use('/ListStaff',ListStaffRouter);
+app.use('/AddDisease',AddDiseaseRouter);
+app.use('/ListDisease',ListDiseaseRouter);
+app.use('/AddMedicine',AddMedicineRouter);
+app.use('/ListMedicine',ListMedicineRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

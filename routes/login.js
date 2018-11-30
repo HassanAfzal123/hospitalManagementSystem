@@ -4,6 +4,7 @@ const db = require('../database');
 const router = express.Router();
 const passport = require('passport') ;
 const bcrypt =  require('bcryptjs');
+const staffModel = require('../Models/staff');
 router.use(express.static(path.join(__dirname,'../','public')));
 /* GET login page.*/
 router.get('/', function(req, res, next) {
@@ -25,17 +26,49 @@ router.post('/signin', function(req, res, next) {
 			res.render(path.join(__dirname,'../','views/login.ejs'));
         }
         if (user) {
-        	let queryString = "SELECT patient_id from PATIENT P,USER_INFO U where U.info_id = P.USER_INFO_info_id AND U.email = ?";
-        	db.connection.query(queryString,[req.body.email],function (err,result,fields) {
-				if(err){
-					res.send("No such user found");
-				}
-				else{
-				    console.log(result[0]);
-                    req.session.user = result[0].patient_id;
-                    res.redirect('/user/home');
-				}
-            });
+            if(req.body.identifyLogin == 'PATIENT') {
+
+                let queryString = "SELECT patient_id from PATIENT P,USER_INFO U where U.info_id = P.USER_INFO_info_id AND U.email = ?";
+                db.connection.query(queryString, [req.body.email], function (err, result, fields) {
+                    if(!result[0]){
+                        res.locals.info = "You are not PATIENT !";
+                        res.locals.success=null;
+                        res.render(path.join(__dirname,'../','views/login.ejs'));
+                    }
+                    else if (err) {
+                        res.send("No such user found");
+                    }
+                    else {
+                        req.session.user = result[0].patient_id;
+                        res.redirect('/user/home');
+                    }
+                });
+            }
+            else if(req.body.identifyLogin == 'STAFF'){
+                let queryString = "SELECT staff_id from STAFF S,USER_INFO U where U.info_id = S.USER_INFO_info_id AND U.email = ?";
+                db.connection.query(queryString, [req.body.email], function (err, result, fields) {
+                    if(!result[0]){
+                        res.locals.info = "You are not staff !";
+                        res.locals.success=null;
+                        res.render(path.join(__dirname,'../','views/login.ejs'));
+                    }
+                    else if (err) {
+                        throw err;
+                    }
+                    else {
+                        staffModel.findStaff(result[0].staff_id, function (staff) {
+                            req.session.staff = result[0].staff_id;
+                            res.redirect('/staff/home');
+                        });
+                    }
+                });
+
+            }
+            else{
+                res.locals.info = "No such requests can be entertained !";
+                res.locals.success=null;
+                res.render(path.join(__dirname,'../','views/login.ejs'));
+            }
         } else {
 			res.locals.info = info.message;
 			res.locals.success=null;
