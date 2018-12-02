@@ -1,4 +1,6 @@
-exports.findStaff = function(staff,callback){
-  var info = {staff: staff};
-  callback(info);
-};
+const WorkForce =  require('./workforce.js');
+module.exports = class Staff extends WorkForce{
+  constructor(name, cellNo, cnicNo, gender){
+    super(name, cellNo, cnicNo, gender);
+  }
+}

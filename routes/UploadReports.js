@@ -1,7 +1,6 @@
 //FOR STAFF
 
 var express = require('express');
-var formidable = require('formidable');
 const path = require('path');
 var multer  =   require('multer');
 var db = require('../database');

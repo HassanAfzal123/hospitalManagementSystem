@@ -9,7 +9,7 @@ const session = require('express-session');
 const cors = require('cors');
 
 const indexRouter = require('./routes/index');
-const admin = require('./routes/admin');
+const admin = require('./routes/Admin');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const donateBlood = require('./routes/ShowBloodReq');
@@ -20,12 +20,10 @@ const homeserviceRouter = require('./routes/homeService');
 const UserReportRouter = require('./routes/userlaboratoryreports');
 const StaffUploadReport = require('./routes/UploadReports');
 const StaffRouter = require('./routes/Staff');
-const AddStaffRouter = require('./routes/Addstaff');
 const ListStaffRouter = require('./routes/Liststaff');
-const AddDiseaseRouter = require('./routes/AddDisease');
 const ListDiseaseRouter = require('./routes/ListDisease');
-const AddMedicineRouter = require('./routes/AddMedicine');
 const ListMedicineRouter = require('./routes/ListMedicine');
+const ChatBot = require('./routes/Chatbot');
 const app = express();
 
 // view engine setup
@@ -58,7 +56,7 @@ app.use(passport.session());
 app.use(session({secret: "asdsadasdsadasdas", resave: false, saveUninitialized: false, cookie: { maxAge: 60000 * 10} }));
 require('./Passport/passport')(passport);
 
-
+app.use('/chat',ChatBot);
 app.use('/home', indexRouter);
 app.use('/user', usersRouter);
 app.use('/login', loginRouter);
@@ -71,11 +69,8 @@ app.use('/reports',UserReportRouter);
 app.use('/admin',admin);
 app.use('/uploadreport',StaffUploadReport);
 app.use('/staff',StaffRouter);
-app.use('/AddStaff',AddStaffRouter);
 app.use('/ListStaff',ListStaffRouter);
-app.use('/AddDisease',AddDiseaseRouter);
 app.use('/ListDisease',ListDiseaseRouter);
-app.use('/AddMedicine',AddMedicineRouter);
 app.use('/ListMedicine',ListMedicineRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

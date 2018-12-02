@@ -6,6 +6,9 @@ const db = require('../database');
 const bcrypt = require('bcryptjs');
 router.use(bodyParser.json());
 router.use(express.static(path.join(__dirname,'../','public')));
+const Staff = require('../Models/staff');
+const Ward = require('../Models/ward');
+const Disease = require('../Models/disease');
 /* GET users listing. */
 router.get('/home', function(req, res, next) {
     if(req.session.staff) {
@@ -63,5 +66,37 @@ router.post('/changepass', function (req,res,next) {
             }
         });
     }
+});
+router.get('/addDisease', function(req, res, next) {
+    if(req.session.staff) {
+        res.render(path.join(__dirname,'../','views/layouts/AddDiseasePage.hbs'));
+    }
+    else{
+        res.send("You are not logged in as Staff !");
+    }
+});
+router.post("/addDisease", async (req, res) => {
+    let staff = new Staff();
+    let disease = new Disease(req.body.name,req.body.description,req.body.symptoms);
+    let result = await staff.addDisease(disease);
+    res.status(result.status).json({
+        response: result.response
+    })
+});
+router.get('/addMedicine', function(req, res, next) {
+    if(req.session.staff) {
+        res.render(path.join(__dirname,'../','views/layouts/AddMedicinePage.hbs'));
+    }
+    else{
+        res.send("You are not logged in as Staff !");
+    }
+});
+router.post("/addMedicine", async (req, res) => {
+    let staff = new Staff();
+    let medicine = new medicine(req.body.medicine,req.body.company);
+    let result = await staff.addMedicine(medicine);
+    res.status(result.status).json({
+        response: result.response
+    })
 });
 module.exports = router;

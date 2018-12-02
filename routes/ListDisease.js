@@ -3,7 +3,6 @@ var path = require('path');
 var router = express.Router();
 var bodyParser = require('body-parser');
 const db = require('../database');
-const bcrypt = require('bcryptjs');
 router.use(bodyParser.json());
 router.use(express.static(path.join(__dirname,'../','public')));
 /* GET users listing. */
