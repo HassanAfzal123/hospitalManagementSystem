@@ -31,18 +31,13 @@ router.get('/',(req,res)=>{
         else{
             result.response.entities.forEach(async element=>{
                 if(element.type=='Disease'){
-                    console.log(element.entityId);
                     await  disease.push(element.entityId);
                 }
             });
             check=0;
-            var j;
-            console.log(disease);
-            let get_Doctor = "SELECT DOCTOR.name,DISEASE.name as Disease FROM DOCTOR,DOCTOR_DISEASE,DISEASE where DOCTOR.doctor_id = DOCTOR_DISEASE.DOCTOR_doctor_id AND DISEASE.disease_id = DOCTOR_DISEASE.DISEASE_disease_id AND DISEASE.name = ?"
+            let get_Doctor = "SELECT DOCTOR.name,DISEASE.name as Disease FROM DOCTOR,DOCTOR_DISEASE,DISEASE where DOCTOR.doctor_id = DOCTOR_DISEASE.DOCTOR_doctor_id AND DISEASE.disease_id = DOCTOR_DISEASE.DISEASE_disease_id AND DISEASE.name in (?)";
             console.log("Here is the list of the doctors for your disease: ");
-            for(j=0;j < disease.length;j++)
-            {
-                db.connection.query(get_Doctor, [disease[j]], function (err, doctor) {
+                db.connection.query(get_Doctor, [disease], function (err, doctor) {
                     if (err) throw err;
                     if(doctor.length < 1) {
                         console.log("Sorry,we have no doctor available for"); //SHOW DISEASE NAME HERE
@@ -52,7 +47,6 @@ router.get('/',(req,res)=>{
                     }
 
                 });
-            }
         }
         res.send(result);
         
