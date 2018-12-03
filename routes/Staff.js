@@ -99,4 +99,12 @@ router.post("/addMedicine", async (req, res) => {
         response: result.response
     })
 });
+router.get('/logout', function(req, res, next) {
+    if(req.session.staff) {
+        req.session.destroy();
+        res.locals.info = null;
+        res.locals.success = null;
+        res.render(path.join(__dirname, '../', 'views/login.ejs'));
+    }
+});
 module.exports = router;

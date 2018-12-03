@@ -4,7 +4,7 @@ const db = require('../database');
 const router = express.Router();
 const passport = require('passport') ;
 const bcrypt =  require('bcryptjs');
-const staffModel = require('../Models/staff');
+const staffModel = require('../Models/staffModel');
 router.use(express.static(path.join(__dirname,'../','public')));
 /* GET login page.*/
 router.get('/', function(req, res, next) {

@@ -4,7 +4,7 @@ const db = require('../database');
 const router = express.Router();
 const TextRazor = require('textrazor');
 const textRazor = new TextRazor('8e3f98862a3fd4aa7b9b3b391e1e14dc56771b60cd36e1c92465a850');
-const content = 'Get me a physician for cancer,Hepatitis and malaria';
+const content = 'Get me a physician for cancer,hepatitis,cholera and malaria';
 const options = { extractors: 'words,entailments,entities'};//,categoies,relations,properties' };
 // router.get('/', function (req, res) {
 //     res.sendFile(path.join(__dirname,'../','views/chatbot.html'));
@@ -35,13 +35,11 @@ router.get('/',(req,res)=>{
                 }
             });
             check=0;
+            console.log(disease);
             let get_Doctor = "SELECT DOCTOR.name,DISEASE.name as Disease FROM DOCTOR,DOCTOR_DISEASE,DISEASE where DOCTOR.doctor_id = DOCTOR_DISEASE.DOCTOR_doctor_id AND DISEASE.disease_id = DOCTOR_DISEASE.DISEASE_disease_id AND DISEASE.name in (?)";
             console.log("Here is the list of the doctors for your disease: ");
                 db.connection.query(get_Doctor, [disease], function (err, doctor) {
                     if (err) throw err;
-                    if(doctor.length < 1) {
-                        console.log("Sorry,we have no doctor available for"); //SHOW DISEASE NAME HERE
-                    }
                     else {
                          console.log(doctor);
                     }
