@@ -4,7 +4,7 @@ const db = require('../database');
 const router = express.Router();
 const TextRazor = require('textrazor');
 const textRazor = new TextRazor('8e3f98862a3fd4aa7b9b3b391e1e14dc56771b60cd36e1c92465a850');
-const content = 'Get me a physician for cancer,hepatitis,cholera and malaria';
+const content = 'Get me a physician for Malaria';
 const options = { extractors: 'words,entailments,entities'};//,categoies,relations,properties' };
 // router.get('/', function (req, res) {
 //     res.sendFile(path.join(__dirname,'../','views/chatbot.html'));

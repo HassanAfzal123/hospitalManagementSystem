@@ -77,6 +77,7 @@ router.get('/addDisease', function(req, res, next) {
 });
 router.post("/addDisease", async (req, res) => {
     let staff = new Staff();
+    console.log(req.body)
     let disease = new Disease(req.body.name,req.body.description,req.body.symptoms);
     let result = await staff.addDisease(disease);
     res.status(result.status).json({

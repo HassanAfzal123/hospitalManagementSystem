@@ -99,7 +99,7 @@ module.exports = class Admin extends WorkForce {
                                         cell_no: admin.cellNo,
                                         cnic_no: admin.cnicNo,
                                         gender: admin.gender,
-                                        USER_INFO_info_id: id = result[0].info_id
+                                        USER_INFO_info_id: result[0].info_id
                                     };
                                     db.connection.query(insertAdmin, [adminData], (insertAdminError) => {
                                         if (insertAdminError) {

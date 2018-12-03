@@ -48,12 +48,12 @@ router.post('/login', function (req, res, next) {
 router.post('/addAdmin', function (req, res) {
     var hash = bcrypt.hashSync(req.body.password, 1);
     const userInfo = new userInfo(req.body.email,hash,1);
-    const newAdmin = new Admin(req.body.name,req.body.cellNo,req.body.cnicNo,gender);
+    const newAdmin = new Admin(req.body.name,req.body.cellNo,req.body.cnicNo,req.body.gender);
     const admin = new Admin();
     let result=admin.addAdmin(newAdmin,userInfo);
     if(result.status==200){
         res.locals.info = null;
-        res.locals.success = result.success;
+        res.locals.success = result.response;
         res.render(path.join(__dirname, '../', 'views/login.ejs'));
     }else{
         res.locals.info = result.response;

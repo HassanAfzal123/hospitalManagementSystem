@@ -1,7 +1,7 @@
 module.exports = class Disease{
-    constructor(name,description,symptoms){
-        this.name=name;
-        this.description=description;
+    constructor(disease_name,Ddescriptionbox,symptoms){
+        this.name=disease_name;
+        this.description=Ddescriptionbox;
         this.symptoms=symptoms;
     }
 }

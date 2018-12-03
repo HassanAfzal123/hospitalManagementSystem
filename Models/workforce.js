@@ -74,7 +74,7 @@ module.exports = class WorkForce {
             let insert_Disease = "INSERT INTO DISEASE SET ?";
             let disease_info = {
                 name: disease.name,
-                details: disease.details,
+                details: disease.description,
                 symptoms: disease.symptoms
             };
             db.connection.query(insert_Disease, [disease_info], inserDiseaseError => {
@@ -83,6 +83,7 @@ module.exports = class WorkForce {
                         resolve({ response: inserDiseaseError.code, status: 409 });
                     }
                     else {
+                        console.log(inserDiseaseError);
                         resolve({ response: inserDiseaseError.code, status: 400 });
                     }
                 }
