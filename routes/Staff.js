@@ -4,6 +4,7 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 const db = require('../database');
 const bcrypt = require('bcryptjs');
+var multer = require('multer');
 router.use(bodyParser.json());
 router.use(express.static(path.join(__dirname,'../','public')));
 const Staff = require('../Models/staff');
@@ -99,6 +100,63 @@ router.post("/addMedicine", async (req, res) => {
     res.status(result.status).json({
         response: result.response
     })
+});
+router.get('/uploadReport', function(req, res, next) {
+    if(req.session.staff) {
+        res.render(path.join(__dirname, '../', 'views/layouts/uploadReport.hbs'));
+    }
+    else{
+        res.send("You are not logged in as Staff");
+    }
+});
+var random;
+var ID = function () {
+    // Math.random should be unique because of its seeding algorithm.
+    // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+    // after the decimal.
+    return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
+};
+var storage = multer.diskStorage(
+    {
+        destination: './public/uploads/',
+        filename: function ( req, file, cb ) {
+
+            cb( null, random +".pdf");
+        }
+    }
+);
+var upload = multer({ storage: storage});
+router.post('/submitReport',upload.any('file'),function(req, res, next) {
+    if(req.session.staff) {
+        var fileaddress = './public/uploads/' + random;
+        var queryString = "INSERT INTO LABORTORY_REPORT SET ?";
+        var Insert_Report_Data = {
+            stored_path: fileaddress,
+            test_name: req.body.testname,
+            PATIENT_patient_id: req.body.patientid
+        };
+        random = ID();
+        db.connection.query(queryString, [Insert_Report_Data], function (err) {
+            if (err) {
+
+                if (err.errno == 1216) {
+                    res.send("No such patient found");
+                }
+
+                else {
+                    console.log(err);
+                    throw err;
+                }
+            }
+            else {
+                res.send("File Uploaded Successfully");
+            }
+
+        });
+    }
+    else{
+        res.send("You are not logged in as staff");
+    }
 });
 router.get('/logout', function(req, res, next) {
     if(req.session.staff) {

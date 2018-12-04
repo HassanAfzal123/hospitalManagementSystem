@@ -8,10 +8,13 @@ const staffModel = require('../Models/staffModel');
 router.use(express.static(path.join(__dirname,'../','public')));
 /* GET login page.*/
 router.get('/', function(req, res, next) {
-    if(!req.session.user) {
+    if(!req.session.user && !req.session.staff) {
         res.locals.info = null;
         res.locals.success = null;
         res.render(path.join(__dirname, '../', 'views/login.ejs'));
+    }
+    else if(req.session.staff){
+        res.redirect('/staff/home');
     }
     else{
         res.redirect('/user/home');

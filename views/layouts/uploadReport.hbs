@@ -60,8 +60,8 @@
                   <span>&nbsp;Staff</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                  <!--<a class="dropdown-item" href="/AddStaff"><i class="fa fa-briefcase-medical"></i>&nbsp; Add Staff</a>-->
-                  <a class="dropdown-item" href="/ListStaff"><i class="fa fa-briefcase-medical"></i>&nbsp; List Staff</a>
+                  <!--<a class="dropdown-item" href="/AddStaff"><i class="fa fa-briefcase-medical"></i>&nbsp;Add Staff</a>-->
+                  <a class="dropdown-item" href="/ListStaff"><i class="fa fa-briefcase-medical"></i>&nbsp;List Staff</a>
               </div>
           </li>
           <li class="nav-item dropdown">
@@ -70,8 +70,8 @@
                   <span>&nbsp;Disease</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                  <a class="dropdown-item" href="/staff/addDisease"><i class="fa fa-briefcase-medical"></i>&nbsp; Add Disease</a>
-                  <a class="dropdown-item active" href="/ListDisease"><i class="fa fa-briefcase-medical"></i>&nbsp; List Disease</a>
+                  <a class="dropdown-item" href="/staff/addDisease"><i class="fa fa-briefcase-medical"></i>&nbsp;Add Disease</a>
+                  <a class="dropdown-item" href="/ListDisease"><i class="fa fa-briefcase-medical"></i>&nbsp;List Disease</a>
               </div>
           </li>
           <li class="nav-item dropdown">
@@ -81,7 +81,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                   <a class="dropdown-item" href="/staff/addMedicine"><i class="fa fa-briefcase-medical"></i>&nbsp; Add Medicine</a>
-                  <a class="dropdown-item" href="/ListMedicine"><i class="fa fa-briefcase-medical"></i>&nbsp; List Medicine</a>
+                  <a class="dropdown-item active" href="/ListMedicine"><i class="fa fa-briefcase-medical"></i>&nbsp; List Medicine</a>
               </div>
           </li>
           <li class="nav-item dropdown">
@@ -105,37 +105,36 @@
             <li class="breadcrumb-item">
               <a href="#">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">List Diseases</li>
+            <li class="breadcrumb-item active">Upload Report</li>
           </ol>
 
 
         <!-- /.container-fluid -->
-            <div class="row">
-                <div class="col-md-12">
-
-                    <h4 class="text-center">Diseases List </h4>
-                    <table class="table table-hover table-bordered table-responsive-md" id="#dtBasicExample">
-                        {{#each disease_details}}
-                            <tr>
-                                {{#if @index}}
-                                {{else}}
-                                    <thead>
-                                    <td>#</td>
-                                    <td>Name</td>
-                                    <td>Symptoms</td>
-                                    <td>Description</td>
-                                    </thead>
-                                {{/if}}
-                                <td><b>{{math @index "+" 1}}</b></td>
-                                <td><b>{{this.name}}</b></td>
-                                <td><b>{{this.symptoms}}</b></td>
-                                <td><b>{{this.description}}</b></td>
-                            </tr>
-                        {{/each}}
-                    </table>
-
+            <div class="text-center"><h3>Upload Report</h3></div>
+            <form action="/staff/submitReport" class="container" enctype="multipart/form-data" method="post">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="patientid" class="form-labletext">Patient ID</label>
+                        <input type="text" class="form-control" id="patientid" name="patientid" required>
+                    </div>
                 </div>
-            </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="testname" class="form-labletext">Test Name</label>
+                        <input type="text" class="form-control" id="testname" name="testname" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <input class="labortareport-input" type="file" name="uploadreport" multiple required>
+                    </div>
+                </div>
+                <br>
+                <div class="form-row">
+                    <div class="col-md-5"></div>
+                    <input class="btn btn-primary" type="submit" value="Upload">
+                </div>
+            </form>
             <!-- Sticky Footer -->
         <footer class="sticky-footer">
           <div class="container my-auto">

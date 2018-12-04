@@ -11,7 +11,7 @@ router.use(express.static(path.join(__dirname,'../','public')));
 var reportid;
 /* GET ADD Labortary Reports page.*/
 router.get('/', function(req, res, next) {
-    res.sendFile(path.join(__dirname,'../','views/labortaryreports.html'));
+    res.sendFile(path.join(__dirname,'../','views/layouts/uploadReport.hbs'));
 });
 var random;
 var ID = function () {
