@@ -44,7 +44,7 @@ module.exports = class WorkForce {
                                                 });
                                             }
                                         })
-                                        if (i < req.body.bedCount)
+                                        if (i < ward.bedCount)
                                             set(i + 1);
                                         else {
                                             db.connection.commit((rollback_err) => {
@@ -104,14 +104,14 @@ module.exports = class WorkForce {
             db.connection.query(insert_Medicine, [Medicine_info], insertMedicineError => {
                 if (insertMedicineError) {
                     if (insertMedicineError.errno == 1062) {
-                        response({ response: insertMedicineError.code, status: 409 });
+                        resolve({ response: insertMedicineError.code, status: 409 });
                     }
                     else {
-                        response({ response: insertMedicineErro.code, status: 400 });
+                        resolve({ response: insertMedicineErro.code, status: 400 });
                     }
                 }
                 else {
-                    response({ response: "Medicine registered successfully !", status: 200 });
+                    resolve({ response: "Success !", status: 200 });
                 }
             })
         })

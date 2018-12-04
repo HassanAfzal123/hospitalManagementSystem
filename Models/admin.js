@@ -1,3 +1,4 @@
+const db = require('../database');
 const WorkForce = require('./workforce.js');
 module.exports = class Admin extends WorkForce {
     constructor(name, cellNo, cnicNo, gender) {
@@ -15,15 +16,16 @@ module.exports = class Admin extends WorkForce {
                     db.connection.query(insertUserInfo, [userInfo], (insertUserInfoError) => {
                         if (insertUserInfoError) {
                             return db.connection.rollback(() => {
-                                if (insertUserInfoError)
+                                if (insertUserInfoError){
                                     resolve({ response: insertUserInfoError.code, status: 400 });
+                                }
+                                    
                             })
                         }
                         else {
-
                             let selectUserInfo = "SELECT info_id from USER_INFO where email = ?";
                             db.connection.query(selectUserInfo, [userInfo.email], function (selectUserInfoError, result) {
-                                if (err) {
+                                if (selectUserInfoError) {
                                     return db.connection.rollback(() => {
                                         resolve({ response: selectUserInfoError.code, status: 400 });
                                     });
@@ -33,7 +35,7 @@ module.exports = class Admin extends WorkForce {
                                     let staffData = {
                                         name: staff.name,
                                         cell_no: staff.cellNo,
-                                        cnic_no: staff.body.cnicNo,
+                                        cnic_no: staff.cnicNo,
                                         gender: staff.gender,
                                         USER_INFO_info_id: result[0].info_id
                                     };
