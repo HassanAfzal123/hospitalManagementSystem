@@ -10,7 +10,17 @@
 
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="/css/animate.css" rel="stylesheet">
+    <script type="text/javascript">
+            function move_id(key) {
+                alert(key);
+                var content = document.getElementById("id_req"+key).innerHTML;
+                alert('asd' + content);
+                document.getElementById("requester_id").value = content;
+
+        }
+    </script>
 </head>
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -52,30 +62,23 @@
                             <div class="img">
                                 <img src="/img/donor.jpg">
                             </div>
+                            <div class="hidden" id="id_req{{key}}">{{val.blood_req_id}}</div>
                             <h2>{{val.first_name}} {{val.last_name}}<br><span>Group: {{val.blood}}<br></span></h2>
-                            <p></p><button type="button" class="btn button-showdetails" data-toggle="collapse" data-target="#demo{{key}}">Show Details</button>
-                                <div id="demo{{key}}" class="collapse out">
-                                    <h2><span>{{val.email}}<br>{{val.number}}</span></h2>
-                                </div></p>
-                            <span>
-                                 <ul>
-                                     <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                     <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                     <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                     <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                     <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                 </ul>
-                            </span>
+                            <p></p><span data-placement="top" data-toggle="tooltip" title="Donate"><button type="button" id="button_id" class="addDialog btn button-showdetails" data-title="Donate" data-toggle="modal" data-target="#donate" onclick="move_id({{key}})" value="Move">Donate Me</button></span>
+                                <!--<div id="demo{{key}}" class="collapse out">-->
+                                    <!--<h2><span>{{val.email}}<br>{{val.number}}</span></h2>-->
+                                <!--</div>--></p>
+
                         </div>
                     </div>
-            {{/each}}
-
+        {{/each}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 <!--footer-->
 <footer id="footer" class="footer-loginpage">
@@ -93,21 +96,54 @@
     </div>
 </footer>
 <!--/ footer-->
+<!-- Donate MODAL -->
+<div class="modal fade" id="donate" tabindex="-1" role="dialog" aria-labelledby="donate" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title custom_align" id="Heading">Donate Blood</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-window-close" aria-hidden="true"></span></button>
+            </div>
+            <form method="post" action="/BloodDonor">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="donorName">Donor Name</label>
+                        <input type="text" class="form-control" name="donorName" id="donorName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="donorNumber">Donor Number</label>
+                        <input type="text" class="form-control" name="donorNumber" id="donorNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control hidden" name="requester_id" id="requester_id" required>
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <button type="submit" class="btn btn-warning btn-lg" style="width: 100%"><span class="fa fa-check"></span> Donate Blood</button>
+                </div>
+            </form>
 
-<script src="/js/jquery.min.js" type="text/javascript">></script>
-<script src="/js/jquery.easing.min.js" type="text/javascript">></script>
-<script src="/js/bootstrap.min.js" type="text/javascript">></script>
-<script src="/js/custom.js" type="text/javascript">></script>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="/js/jquery.easing.min.js" type="text/javascript"></script>
+<script src="/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/js/custom.js" type="text/javascript"></script>
 <script src="/js/wow.js" type="javascript"></script>
-<script src="/js/jquery.min.js" type="text/javascript">></script>
-<script src="/js/jquery-migrate.min.js" type="text/javascript">></script>
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="/js/jquery-migrate.min.js" type="text/javascript"></script>
 <script src="/js/jquery.flexslider-min.js" type="text/javascript"></script>
 <script src="/js/jquery.stellar.min.js" type="text/javascript"></script>
 <script src="/js/jquery.magnific-popup.min.js" type="text/javascript"></script>
 <script src="/js/wow.min.js" type="text/javascript"></script>
 <script src="/js/custom.js" type="text/javascript"></script>
 <script src="/js/wow.js" type="text/javascript"></script>
-
 </body>
 
 </html>

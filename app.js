@@ -24,6 +24,7 @@ const ListStaffRouter = require('./routes/Liststaff');
 const ListDiseaseRouter = require('./routes/ListDisease');
 const ListMedicineRouter = require('./routes/ListMedicine');
 const ChatBot = require('./routes/Chatbot');
+const BloodDonor = require('./routes/BloodDonor');
 const app = express();
 
 // view engine setup
@@ -72,6 +73,9 @@ app.use('/staff',StaffRouter);
 app.use('/ListStaff',ListStaffRouter);
 app.use('/ListDisease',ListDiseaseRouter);
 app.use('/ListMedicine',ListMedicineRouter);
+app.use('/BloodDonor',BloodDonor);
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
