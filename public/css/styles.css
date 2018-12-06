@@ -4,7 +4,9 @@ body {
   font-size: 14px;
   color: #444444;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-
+  div.container {
+    width: 80%;
+}
 p {
   color: #777; }
 

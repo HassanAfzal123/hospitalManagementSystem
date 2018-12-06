@@ -26,6 +26,12 @@ router.get('/addWard',async(req,res)=>{
 router.get('/addMedicine',async(req,res)=>{
     res.sendFile(path.join(__dirname,'../','views/addMedicine.html'));
 })
+router.get('/getAdminData',async(req,res)=>{
+    res.sendFile(path.join(__dirname,'../','views/getAdmin.html'));
+})
+router.get('/getStaffData',async(req,res)=>{
+    res.sendFile(path.join(__dirname,'../','views/getStaff.html'));
+})
 router.get('/addDisease',async(req,res)=>{
     res.sendFile(path.join(__dirname,'../','views/addDisease.html'));
 })
@@ -64,20 +70,25 @@ router.post('/login', function (req, res, next) {
         }
     })(req, res, next);
 });
-router.post('/addAdmin', function (req, res) {
-    var hash = bcrypt.hashSync(req.body.password, 1);
+router.post('/addAdmin',async (req, res)=> {
+    var hash = bcrypt.hashSync("password", 1);
     const userInfo = new UserInfo(req.body.email,hash,1);
-    const newAdmin = new Admin(req.body.name,req.body.cellNo,req.body.cnicNo,req.body.gender);
+    const newAdmin = new Admin(req.body.name,req.body.cell_no,req.body.cnic_no,req.body.gender);
     const admin = new Admin();
-    let result=admin.addAdmin(newAdmin,userInfo);
+    let result = await admin.addAdmin(newAdmin,userInfo);
+    console.log(result)
     if(result.status==200){
-        res.locals.info = null;
-        res.locals.success = result.response;
-        res.render(path.join(__dirname, '../', 'views/login.ejs'));
+        // res.locals.info = null;
+        // res.locals.success = result.response;
+        // res.render(path.join(__dirname, '../', 'views/login.ejs'));
+        //console.log(result.response+" "+result.status);
+        res.sendFile(path.join(__dirname,'../','views/addAdmin.html'));
     }else{
-        res.locals.info = result.response;
-        res.locals.success = null;
-        res.render(path.join(__dirname, '../', 'views/login.ejs'));
+        // res.locals.info = result.response;
+        // res.locals.success = null;
+        // res.render(path.join(__dirname, '../', 'views/login.ejs'));
+        //console.log(result.response+" "+result.status);
+        res.sendFile(path.join(__dirname,'../','views/addAdmin.html'));
     }
     
 });
@@ -122,6 +133,20 @@ router.post("/addMedicine", async (req, res) => {
     let result = await admin.addMedicine(medicine);
     res.status(result.status).json({
         response: result.response
+    })
+});
+router.get('/getAdmin', async (req,res)=>{
+    let admin = new Admin();
+    let result = await admin.getAdmin();
+    res.status(result.status).json({
+        data: result.response
+    })
+});
+router.get('/getStaff', async (req,res)=>{
+    let admin = new Admin();
+    let result = await admin.getStaff();
+    res.status(result.status).json({
+        data: result.response
     })
 });
 module.exports = router;
