@@ -26,14 +26,23 @@ router.get('/addWard',async(req,res)=>{
 router.get('/addMedicine',async(req,res)=>{
     res.sendFile(path.join(__dirname,'../','views/addMedicine.html'));
 })
+router.get('/addDisease',async(req,res)=>{
+    res.sendFile(path.join(__dirname,'../','views/addDisease.html'));
+})
 router.get('/getAdminData',async(req,res)=>{
     res.sendFile(path.join(__dirname,'../','views/getAdmin.html'));
 })
 router.get('/getStaffData',async(req,res)=>{
     res.sendFile(path.join(__dirname,'../','views/getStaff.html'));
 })
-router.get('/addDisease',async(req,res)=>{
-    res.sendFile(path.join(__dirname,'../','views/addDisease.html'));
+router.get('/getMedicineData',async(req,res)=>{
+    res.sendFile(path.join(__dirname,'../','views/getMedicine.html'));
+})
+router.get('/getDiseaseData',async(req,res)=>{
+    res.sendFile(path.join(__dirname,'../','views/getDisease.html'));
+})
+router.get('/getWardData',async(req,res)=>{
+    res.sendFile(path.join(__dirname,'../','views/getWard.html'));
 })
 router.get('/login', function (req, res) {
     if (!req.session.user) {
@@ -149,4 +158,60 @@ router.get('/getStaff', async (req,res)=>{
         data: result.response
     })
 });
+router.get('/getMedicine', async (req,res)=>{
+    let admin = new Admin();
+    let result = await admin.getMedicine();
+    res.status(result.status).json({
+        data: result.response
+    })
+});
+router.get('/getDisease', async (req,res)=>{
+    let admin = new Admin();
+    let result = await admin.getDisease();
+    res.status(result.status).json({
+        data: result.response
+    })
+});
+router.get('/getWard',async (req,res)=>{
+    let admin= new Admin();
+    let result = await admin.getWard();
+    res.status(result.status).json({
+        data: result.response
+    })
+});
+router.get('/getBloodRequest',async (req,res)=>{
+    let admin= new Admin();
+    let result = await admin.getBloodRequest();
+    res.status(result.status).json({
+        data: result.response
+    })
+});
+// router.get('/getZakaatRequest',async (req,res)=>{
+//     let admin= new Admin();
+//     let result = await admin.getZakaatRequest();
+//     res.status(result.status).json({
+//         data: result.response
+//     })
+// });
+router.get('/getHomeService',async (req,res)=>{
+    let admin = new Admin();
+    let result = await admin.getHomeService();
+    res.status(result.status).json({
+        data: result.response
+    });
+})
+router.get('/getAppointment',async (req,res)=>{
+    let admin = new Admin();
+    let result = await admin.getAppointment();
+    res.status(result.status).json({
+        data: result.response
+    });
+})
+router.get('/getHomeService',async (req,res)=>{
+    let admin = new Admin();
+    let result = await admin.getHomeService();
+    res.status(result.status).json({
+        data: result.response
+    });
+})
 module.exports = router;
