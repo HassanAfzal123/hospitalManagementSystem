@@ -6,6 +6,7 @@ router.use(express.static(path.join(__dirname, '../', 'public')));
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const Admin = require('../Models/admin');
+const Doctor = require('../Models/doctor');
 const UserInfo = require('../Models/userInfo');
 const Staff = require('../Models/staff');
 const Ward = require('../Models/ward');
@@ -30,6 +31,17 @@ router.get('/addStaff',async(req,res)=>{
 router.get('/addAdmin',async(req,res)=>{
     if(req.session.admin){
         res.sendFile(path.join(__dirname,'../','views/addAdmin.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
+})
+router.get('/addDoctor',async(req,res)=>{
+    if(req.session.admin){
+        const admin = new Admin();
+        let disease = await admin.getDiseaseList();
+        res.locals.disease=disease.response
+        res.render(path.join(__dirname,'../','views/addDoctor.ejs'));
     }
     else{
         res.send("Please login to continue");
@@ -99,6 +111,14 @@ router.get('/getWardData',async(req,res)=>{
         res.send("Please login to continue");
     }
 })
+router.get('/getDoctorDataData',async(req,res)=>{
+    if(req.session.admin){
+        res.sendFile(path.join(__dirname,'../','views/getDoctor.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
+})
 router.get('/getBloodRequestData',async(req,res)=>{
     if(req.session.admin){
         res.sendFile(path.join(__dirname,'../','views/getBloodRequest.html'));
@@ -136,13 +156,11 @@ router.get('/', function (req, res) {
 router.post('/login', function (req, res, next) {
     passport.authenticate("local", function (err, user, info) {
         if (err) {
-            console.log('1')
             res.locals.info = "Error logging in";
             res.locals.success = null;
             res.render(path.join(__dirname, '../', 'views/adminLogin.ejs'));
         }
-        if (user) {
-            console.log('2')
+        if (user){
             let queryString = "SELECT admin_id from ADMIN A,USER_INFO U where U.info_id = A.USER_INFO_info_id AND U.email = ?";
             db.connection.query(queryString, [req.body.email], function (err, result, fields) {
                 if (err) {
@@ -154,7 +172,6 @@ router.post('/login', function (req, res, next) {
                 }
             });
         } else {
-            console.log('3')
             res.locals.info = info.message;
             res.locals.success = null;
             res.render(path.join(__dirname, '../', 'views/adminLogin.ejs'));
@@ -168,16 +185,10 @@ router.post('/addAdmin',async (req, res)=> {
         const newAdmin = new Admin(req.body.name, req.body.cell_no, req.body.cnic_no, req.body.gender);
         const admin = new Admin();
         let result = await admin.addAdmin(newAdmin, userInfo);
-        console.log(result)
         if (result.status == 200) {
             res.sendFile(path.join(__dirname, '../', 'views/addAdmin.html'));
         } else {
-            // res.locals.info = result.response;
-            // res.locals.success = null;
-            // res.render(path.join(__dirname, '../', 'views/login.ejs'));
-            //console.log(result.response+" "+result.status);
-            //res.sendFile(path.join(__dirname, '../', 'views/addAdmin.html'));
-            res.send(result.status);
+            res.send(result.response);
         }
     }
     else{
@@ -192,13 +203,10 @@ router.post('/addStaff', async (req, res)=> {
         const admin = new Admin();
         let result = await admin.addStaff(staff, userInfo);
         if (result.status == 200) {
-            res.locals.info = null;
-            res.locals.success = result.success;
-            //res.render(path.join(__dirname, '../', 'views/login.ejs'));
-            res.send("success");
+            res.sendFile(path.join(__dirname, '../', 'views/addDoctor.html'));
         } else {
-            res.locals.info = result.response;
-            res.locals.success = null;
+            // res.locals.info = result.response;
+            // res.locals.success = null;
             //res.render(path.join(__dirname, '../', 'views/login.ejs'));
             res.send(result.response)
         }
@@ -251,6 +259,19 @@ router.get('/getAdmin', async (req, res) => {
     if (req.session.admin) {
         let admin = new Admin();
         let result = await admin.getAdmin();
+        res.status(result.status).json({
+            data: result.response
+        })
+    }
+    else {
+        res.send("Please Login to continue");
+    }
+});
+router.post('/addDoctor', async (req, res) => {
+    if (req.session.admin) {
+        let doctor = new Doctor(req.body.name,req.body.cell_no,req.body.cnic_no,req.body.gender,req.body.disease);
+        let admin = new Admin(doctor);
+        let result = await admin.addDoctor(doctor);
         res.status(result.status).json({
             data: result.response
         })
@@ -320,13 +341,13 @@ router.get('/getBloodRequest', async (req, res) => {
         res.send("Please Login to continue");
     }
 });
-// router.get('/getZakaatRequest',async (req,res)=>{
-//     let admin= new Admin();
-//     let result = await admin.getZakaatRequest();
-//     res.status(result.status).json({
-//         data: result.response
-//     })
-// });
+router.get('/getDoctor',async (req,res)=>{
+    let admin= new Admin();
+    let result = await admin.getDoctor();
+    res.status(result.status).json({
+        data: result.response
+    })
+});
 router.get('/getAppointment', async (req, res) => {
     if (req.session.admin) {
         let admin = new Admin();

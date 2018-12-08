@@ -45,7 +45,6 @@ const options = { extractors: 'words,entailments,entities'};//,categoies,relatio
                                }
                            });
                            check=0;
-                           console.log(disease);
                            let get_Doctor = "SELECT DOCTOR.name as DoctorName,DISEASE.name as Disease FROM DOCTOR,DOCTOR_DISEASE,DISEASE where DOCTOR.doctor_id = DOCTOR_DISEASE.DOCTOR_doctor_id AND DISEASE.disease_id = DOCTOR_DISEASE.DISEASE_disease_id AND DISEASE.name in (?)";
                            db.connection.query(get_Doctor, [disease], function (err, doctor) {
                                if (err) throw err;
