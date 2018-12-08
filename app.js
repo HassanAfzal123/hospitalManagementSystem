@@ -23,8 +23,8 @@ const StaffRouter = require('./routes/Staff');
 const ListStaffRouter = require('./routes/Liststaff');
 const ListDiseaseRouter = require('./routes/ListDisease');
 const ListMedicineRouter = require('./routes/ListMedicine');
-const ChatBot = require('./routes/Chatbot');
 const BloodDonor = require('./routes/BloodDonor');
+const ChatBotRouter = require('./routes/chat');
 const app = express();
 
 // view engine setup
@@ -51,13 +51,12 @@ app.use(express.static('public'));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-//app.use(session({ secret: "cats" }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(session({secret: "asdsadasdsadasdas", resave: false, saveUninitialized: false, cookie: { maxAge: 60000 * 10} }));
 require('./Passport/passport')(passport);
 
-app.use('/chat',ChatBot);
+app.use('/chat',ChatBotRouter);
 app.use('/home', indexRouter);
 app.use('/user', usersRouter);
 app.use('/login', loginRouter);
@@ -77,6 +76,7 @@ app.use('/BloodDonor',BloodDonor);
 
 
 // catch 404 and forward to error handler
+
 app.use(function(req, res, next) {
   next(createError(404));
 });
