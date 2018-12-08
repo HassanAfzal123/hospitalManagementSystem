@@ -203,11 +203,8 @@ router.post('/addStaff', async (req, res)=> {
         const admin = new Admin();
         let result = await admin.addStaff(staff, userInfo);
         if (result.status == 200) {
-            res.sendFile(path.join(__dirname, '../', 'views/addDoctor.html'));
+            res.sendFile(path.join(__dirname, '../', 'views/addStaff.html'));
         } else {
-            // res.locals.info = result.response;
-            // res.locals.success = null;
-            //res.render(path.join(__dirname, '../', 'views/login.ejs'));
             res.send(result.response)
         }
     }
@@ -221,9 +218,14 @@ router.post("/addWard",async (req, res) => {
         let admin = new Admin();
         let ward = new Ward(req.body.name, req.body.bedCount, req.body.class)
         let result = await admin.addWard(ward);
-        res.status(result.status).json({
-            response: result.response
-        })
+        if(result.status==200){
+            res.sendFile(path.join(__dirname, '../', 'views/addWard.html'));
+        }
+        else{
+            res.status(result.status).json({
+                response: result.response
+            })
+        }
     }
     else{
         res.send("Please Login to continue");
@@ -234,9 +236,14 @@ router.post("/addDisease", async (req, res) => {
         let admin = new Admin();
         let disease = new Disease(req.body.name, req.body.description, req.body.symptoms);
         let result = await admin.addDisease(disease);
-        res.status(result.status).json({
-            response: result.response
-        })
+        if(result.status==200){
+            res.sendFile(path.join(__dirname, '../', 'views/addDisease.html'));
+        }
+        else{
+            res.status(result.status).json({
+                response: result.response
+            })
+        }
     }
     else{
         res.send("Please Login to continue");
@@ -247,9 +254,13 @@ router.post("/addMedicine", async (req, res) => {
         let admin = new Admin();
         let medicine = new Medicine(req.body.name, req.body.company);
         let result = await admin.addMedicine(medicine);
-        res.status(result.status).json({
-            response: result.response
-        })
+        if(result.status==200){
+            res.sendFile(path.join(__dirname, '../', 'views/addMedicine.html'));
+        }else{
+            res.status(result.status).json({
+                response: result.response
+            })
+        }
     }
     else{
         res.send("Please Login to continue");
@@ -272,9 +283,15 @@ router.post('/addDoctor', async (req, res) => {
         let doctor = new Doctor(req.body.name,req.body.cell_no,req.body.cnic_no,req.body.gender,req.body.disease);
         let admin = new Admin(doctor);
         let result = await admin.addDoctor(doctor);
-        res.status(result.status).json({
-            data: result.response
-        })
+        if(result.status!=200){
+            res.status(result.status).json({
+                data: result.response
+            })
+        }
+        else{
+            res.sendFile(path.join(__dirname, '../', 'views/addDoctor.html'));
+        }
+        
     }
     else {
         res.send("Please Login to continue");
