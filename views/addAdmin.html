@@ -61,19 +61,6 @@
 						</a></li>
 				</ul>
 			</li>
-			<li class="parent "><a data-toggle="collapse" href="#pharmacy">
-					<i class="fas fa-briefcase-medical">&nbsp;</i> Pharamacy <span data-toggle="collapse" href="#pharmacy" class="icon pull-right"><em
-						 class="fa fa-plus"></em></span>
-				</a>
-				<ul class="children collapse" id="pharmacy">
-					<li><a class="" href="#">
-							<span class="fa fa-arrow-right">&nbsp;</span> Add Pharamacy Info
-						</a></li>
-					<li><a class="" href="/admin/getWardData">
-							<span class="fa fa-arrow-right">&nbsp;</span> View Pharmacies
-						</a></li>
-				</ul>
-			</li>
 			<li class="parent "><a data-toggle="collapse" href="#disease">
 					<i class="fas fa-notes-medical">&nbsp;</i> Disease <span data-toggle="collapse" href="#disease" class="icon pull-right"><em
 						 class="fa fa-plus"></em></span>
@@ -108,23 +95,22 @@
 					<li><a class="" href="/admin/addWard">
 							<span class="fa fa-arrow-right">&nbsp;</span> Add Ward
 						</a></li>
-					<li><a class="" href="#">
+					<li><a class="" href="/admin/getWard">
 							<span class="fa fa-arrow-right">&nbsp;</span> View Ward
 						</a></li>
 				</ul>
 			</li>
-			<li><a href="#"><i class="fas fa-burn">&nbsp;</i><span class="active">Blood Requests</a></li>
-			<li><a href="#"><i class="fas fa-hand-holding-usd">&nbsp;</i> Zakaat Requests</a></li>
-			<li><a href="#"><i class="fas fa-ambulance">&nbsp;</i> Home Service</a></li>
-			<li><a href="#"><i class="fas fa-calendar-check">&nbsp;</i> Appointments</a></li>
-			<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<li><a href="/admin/getBloodRequestData"><i class="fas fa-burn">&nbsp;</i><span class="active">Blood Requests</a></li>
+			<li><a href="/admin/getHomeServiceData"><i class="fas fa-ambulance">&nbsp;</i> Home Service</a></li>
+			<li><a href="/admin/getAppointmentData"><i class="fas fa-calendar-check">&nbsp;</i> Appointments</a></li>
+			<li><a href="/admin/logout"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div>
 	<!--/.sidebar-->
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a href="#">
+				<li><a href="/admin/home">
 						<em class="fa fa-home"></em>
 					</a></li>
 				<li class="active">Dashboard / Add Admin</li>

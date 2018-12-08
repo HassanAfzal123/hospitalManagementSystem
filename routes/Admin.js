@@ -11,41 +11,120 @@ const Staff = require('../Models/staff');
 const Ward = require('../Models/ward');
 const Disease = require('../Models/disease');
 const Medicine = require('../Models/medicine');
-router.get('/',async(req,res)=>{
-    res.sendFile(path.join(__dirname,'../','views/adminHome.html'));
+router.get('/home',async(req,res)=>{
+    if(req.session.admin){
+        res.sendFile(path.join(__dirname,'../','views/adminHome.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
 })
 router.get('/addStaff',async(req,res)=>{
-    res.sendFile(path.join(__dirname,'../','views/addStaff.html'));
+    if(req.session.admin){
+        res.sendFile(path.join(__dirname,'../','views/addStaff.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
 })
 router.get('/addAdmin',async(req,res)=>{
-    res.sendFile(path.join(__dirname,'../','views/addAdmin.html'));
+    if(req.session.admin){
+        res.sendFile(path.join(__dirname,'../','views/addAdmin.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
 })
 router.get('/addWard',async(req,res)=>{
-    res.sendFile(path.join(__dirname,'../','views/addWard.html'));
+    if(req.session.admin){
+        res.sendFile(path.join(__dirname,'../','views/addWard.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
 })
 router.get('/addMedicine',async(req,res)=>{
-    res.sendFile(path.join(__dirname,'../','views/addMedicine.html'));
+    if(req.session.admin){
+        res.sendFile(path.join(__dirname,'../','views/addMedicine.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
 })
 router.get('/addDisease',async(req,res)=>{
-    res.sendFile(path.join(__dirname,'../','views/addDisease.html'));
+    if(req.session.admin){
+        res.sendFile(path.join(__dirname,'../','views/addDisease.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
 })
 router.get('/getAdminData',async(req,res)=>{
-    res.sendFile(path.join(__dirname,'../','views/getAdmin.html'));
+    if(req.session.admin){
+        res.sendFile(path.join(__dirname,'../','views/getAdmin.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
 })
 router.get('/getStaffData',async(req,res)=>{
-    res.sendFile(path.join(__dirname,'../','views/getStaff.html'));
+    if(req.session.admin){
+        res.sendFile(path.join(__dirname,'../','views/getStaff.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
 })
 router.get('/getMedicineData',async(req,res)=>{
-    res.sendFile(path.join(__dirname,'../','views/getMedicine.html'));
+    if(req.session.admin){
+        res.sendFile(path.join(__dirname,'../','views/getMedicine.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
 })
 router.get('/getDiseaseData',async(req,res)=>{
-    res.sendFile(path.join(__dirname,'../','views/getDisease.html'));
+    if(req.session.admin){
+        res.sendFile(path.join(__dirname,'../','views/getDisease.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
 })
 router.get('/getWardData',async(req,res)=>{
-    res.sendFile(path.join(__dirname,'../','views/getWard.html'));
+    if(req.session.admin){
+        res.sendFile(path.join(__dirname,'../','views/getWard.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
 })
-router.get('/login', function (req, res) {
-    if (!req.session.user) {
+router.get('/getBloodRequestData',async(req,res)=>{
+    if(req.session.admin){
+        res.sendFile(path.join(__dirname,'../','views/getBloodRequest.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
+})
+router.get('/getHomeServiceData',async(req,res)=>{
+    if(req.session.admin){
+        res.sendFile(path.join(__dirname,'../','views/getHomeService.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
+})
+router.get('/getAppointmentData',async(req,res)=>{
+    if(req.session.admin){
+        res.sendFile(path.join(__dirname,'../','views/getAppointment.html'));
+    }
+    else{
+        res.send("Please login to continue");
+    }
+})
+router.get('/', function (req, res) {
+    if (!req.session.admin) {
         res.locals.info = null;
         res.locals.success = null;
         res.render(path.join(__dirname, '../', 'views/adminLogin.ejs'));
@@ -57,134 +136,189 @@ router.get('/login', function (req, res) {
 router.post('/login', function (req, res, next) {
     passport.authenticate("local", function (err, user, info) {
         if (err) {
-            res.locals.info = "Error logging in.";
+            console.log('1')
+            res.locals.info = "Error logging in";
             res.locals.success = null;
             res.render(path.join(__dirname, '../', 'views/adminLogin.ejs'));
         }
         if (user) {
+            console.log('2')
             let queryString = "SELECT admin_id from ADMIN A,USER_INFO U where U.info_id = A.USER_INFO_info_id AND U.email = ?";
             db.connection.query(queryString, [req.body.email], function (err, result, fields) {
                 if (err) {
                     res.send("No such user found");
                 }
                 else {
-                    req.session.user = result[0].patient_id;
+                    req.session.admin = result[0].admin_id;
                     res.redirect('/admin/home');
                 }
             });
         } else {
+            console.log('3')
             res.locals.info = info.message;
             res.locals.success = null;
-            res.render(path.join(__dirname, '../', 'views/login.ejs'));
+            res.render(path.join(__dirname, '../', 'views/adminLogin.ejs'));
         }
     })(req, res, next);
 });
 router.post('/addAdmin',async (req, res)=> {
-    var hash = bcrypt.hashSync("password", 1);
-    const userInfo = new UserInfo(req.body.email,hash,1);
-    const newAdmin = new Admin(req.body.name,req.body.cell_no,req.body.cnic_no,req.body.gender);
-    const admin = new Admin();
-    let result = await admin.addAdmin(newAdmin,userInfo);
-    console.log(result)
-    if(result.status==200){
-        // res.locals.info = null;
-        // res.locals.success = result.response;
-        // res.render(path.join(__dirname, '../', 'views/login.ejs'));
-        //console.log(result.response+" "+result.status);
-        res.sendFile(path.join(__dirname,'../','views/addAdmin.html'));
-    }else{
-        // res.locals.info = result.response;
-        // res.locals.success = null;
-        // res.render(path.join(__dirname, '../', 'views/login.ejs'));
-        //console.log(result.response+" "+result.status);
-        res.sendFile(path.join(__dirname,'../','views/addAdmin.html'));
+    if (req.session.admin) {
+        var hash = bcrypt.hashSync("password", 1);
+        const userInfo = new UserInfo(req.body.email, hash, 1);
+        const newAdmin = new Admin(req.body.name, req.body.cell_no, req.body.cnic_no, req.body.gender);
+        const admin = new Admin();
+        let result = await admin.addAdmin(newAdmin, userInfo);
+        console.log(result)
+        if (result.status == 200) {
+            res.sendFile(path.join(__dirname, '../', 'views/addAdmin.html'));
+        } else {
+            // res.locals.info = result.response;
+            // res.locals.success = null;
+            // res.render(path.join(__dirname, '../', 'views/login.ejs'));
+            //console.log(result.response+" "+result.status);
+            //res.sendFile(path.join(__dirname, '../', 'views/addAdmin.html'));
+            res.send(result.status);
+        }
     }
-    
+    else{
+        res.send("Please Login to continue");
+    }
 });
 router.post('/addStaff', async (req, res)=> {
-    var hash = bcrypt.hashSync("password", 1);
-    const userInfo = new UserInfo(req.body.email,hash,2);
-    const staff = new Staff(req.body.name,req.body.cell_no,req.body.cnic_no,req.body.gender);
-    const admin = new Admin();
-    let result=await admin.addStaff(staff,userInfo);
-    if(result.status==200){
-        res.locals.info = null;
-        res.locals.success = result.success;
-        //res.render(path.join(__dirname, '../', 'views/login.ejs'));
-        res.send("success");
-    }else{
-        res.locals.info = result.response;
-        res.locals.success = null;
-        //res.render(path.join(__dirname, '../', 'views/login.ejs'));
-        res.send(result.response)
+    if (req.session.admin) {
+        var hash = bcrypt.hashSync("password", 1);
+        const userInfo = new UserInfo(req.body.email, hash, 2);
+        const staff = new Staff(req.body.name, req.body.cell_no, req.body.cnic_no, req.body.gender);
+        const admin = new Admin();
+        let result = await admin.addStaff(staff, userInfo);
+        if (result.status == 200) {
+            res.locals.info = null;
+            res.locals.success = result.success;
+            //res.render(path.join(__dirname, '../', 'views/login.ejs'));
+            res.send("success");
+        } else {
+            res.locals.info = result.response;
+            res.locals.success = null;
+            //res.render(path.join(__dirname, '../', 'views/login.ejs'));
+            res.send(result.response)
+        }
+    }
+    else{
+        res.send("Please Login to continue");
     }
     
 });
 router.post("/addWard",async (req, res) => {
-    let admin = new Admin();
-    let ward = new Ward(req.body.name,req.body.bedCount,req.body.class)
-    let result = await admin.addWard(ward);
-    res.status(result.status).json({
-        response: result.response
-    })
+    if (req.session.admin) {
+        let admin = new Admin();
+        let ward = new Ward(req.body.name, req.body.bedCount, req.body.class)
+        let result = await admin.addWard(ward);
+        res.status(result.status).json({
+            response: result.response
+        })
+    }
+    else{
+        res.send("Please Login to continue");
+    }
 });
 router.post("/addDisease", async (req, res) => {
-    let admin = new Admin();
-    let disease = new Disease(req.body.name,req.body.description,req.body.symptoms);
-    let result = await admin.addDisease(disease);
-    res.status(result.status).json({
-        response: result.response
-    })
+    if (req.session.admin) {
+        let admin = new Admin();
+        let disease = new Disease(req.body.name, req.body.description, req.body.symptoms);
+        let result = await admin.addDisease(disease);
+        res.status(result.status).json({
+            response: result.response
+        })
+    }
+    else{
+        res.send("Please Login to continue");
+    }
 });
 router.post("/addMedicine", async (req, res) => {
-    let admin = new Admin();
-    let medicine = new Medicine(req.body.name,req.body.company);
-    let result = await admin.addMedicine(medicine);
-    res.status(result.status).json({
-        response: result.response
-    })
+    if (req.session.admin) {
+        let admin = new Admin();
+        let medicine = new Medicine(req.body.name, req.body.company);
+        let result = await admin.addMedicine(medicine);
+        res.status(result.status).json({
+            response: result.response
+        })
+    }
+    else{
+        res.send("Please Login to continue");
+    }
 });
-router.get('/getAdmin', async (req,res)=>{
-    let admin = new Admin();
-    let result = await admin.getAdmin();
-    res.status(result.status).json({
-        data: result.response
-    })
+router.get('/getAdmin', async (req, res) => {
+    if (req.session.admin) {
+        let admin = new Admin();
+        let result = await admin.getAdmin();
+        res.status(result.status).json({
+            data: result.response
+        })
+    }
+    else {
+        res.send("Please Login to continue");
+    }
 });
-router.get('/getStaff', async (req,res)=>{
-    let admin = new Admin();
-    let result = await admin.getStaff();
-    res.status(result.status).json({
-        data: result.response
-    })
+router.get('/getStaff', async (req, res) => {
+    if (req.session.admin) {
+        let admin = new Admin();
+        let result = await admin.getStaff();
+        res.status(result.status).json({
+            data: result.response
+        })
+    }
+    else {
+        res.send("Please Login to continue");
+    }
 });
-router.get('/getMedicine', async (req,res)=>{
-    let admin = new Admin();
-    let result = await admin.getMedicine();
-    res.status(result.status).json({
-        data: result.response
-    })
+router.get('/getMedicine', async (req, res) => {
+    if (req.session.admin) {
+        let admin = new Admin();
+        let result = await admin.getMedicine();
+        res.status(result.status).json({
+            data: result.response
+        })
+    }
+    else {
+        res.send("Please Login to continue");
+    }
 });
-router.get('/getDisease', async (req,res)=>{
-    let admin = new Admin();
-    let result = await admin.getDisease();
-    res.status(result.status).json({
-        data: result.response
-    })
+router.get('/getDisease', async (req, res) => {
+    if (req.session.admin) {
+        let admin = new Admin();
+        let result = await admin.getDisease();
+        res.status(result.status).json({
+            data: result.response
+        })
+    }
+    else {
+        res.send("Please Login to continue");
+    }
 });
-router.get('/getWard',async (req,res)=>{
-    let admin= new Admin();
-    let result = await admin.getWard();
-    res.status(result.status).json({
-        data: result.response
-    })
+router.get('/getWard', async (req, res) => {
+
+    if (req.session.admin) {
+        let admin = new Admin();
+        let result = await admin.getWard();
+        res.status(result.status).json({
+            data: result.response
+        })
+    }
+    else {
+        res.send("Please Login to continue");
+    }
 });
-router.get('/getBloodRequest',async (req,res)=>{
-    let admin= new Admin();
-    let result = await admin.getBloodRequest();
-    res.status(result.status).json({
-        data: result.response
-    })
+router.get('/getBloodRequest', async (req, res) => {
+    if (req.session.admin) {
+        let admin = new Admin();
+        let result = await admin.getBloodRequest();
+        res.status(result.status).json({
+            data: result.response
+        })
+    }
+    else {
+        res.send("Please Login to continue");
+    }
 });
 // router.get('/getZakaatRequest',async (req,res)=>{
 //     let admin= new Admin();
@@ -193,25 +327,36 @@ router.get('/getBloodRequest',async (req,res)=>{
 //         data: result.response
 //     })
 // });
-router.get('/getHomeService',async (req,res)=>{
-    let admin = new Admin();
-    let result = await admin.getHomeService();
-    res.status(result.status).json({
-        data: result.response
-    });
+router.get('/getAppointment', async (req, res) => {
+    if (req.session.admin) {
+        let admin = new Admin();
+        let result = await admin.getAppointment();
+        res.status(result.status).json({
+            data: result.response
+        });
+    }
+    else {
+        res.send("Please Login to continue");
+    }
 })
-router.get('/getAppointment',async (req,res)=>{
-    let admin = new Admin();
-    let result = await admin.getAppointment();
-    res.status(result.status).json({
-        data: result.response
-    });
+router.get('/getHomeService', async (req, res) => {
+    if (req.session.admin) {
+        let admin = new Admin();
+        let result = await admin.getHomeService();
+        res.status(result.status).json({
+            data: result.response
+        });
+    }
+    else {
+        res.send("Please Login to continue");
+    }
 })
-router.get('/getHomeService',async (req,res)=>{
-    let admin = new Admin();
-    let result = await admin.getHomeService();
-    res.status(result.status).json({
-        data: result.response
-    });
-})
+router.get('/logout', (req, res)=> {
+    if(req.session.admin) {
+        req.session.destroy();
+        res.locals.info = null;
+        res.locals.success = null;
+        res.render(path.join(__dirname, '../', 'views/adminLogin.ejs'));
+    }
+});
 module.exports = router;
