@@ -1,4 +1,4 @@
-module.exports.say = function(text) {
+module.exports.say = function(text,callback) {
     //text.replace(/[\W_]+/g," ").replace(":"," is ");
     text = text.replace(/:\s*/g," is ").replace(/","\s*/g," for ").replace(/},{\s*/g," and ");
     console.log(text);
@@ -11,7 +11,8 @@ module.exports.say = function(text) {
     childD.stdin.end(text);
     childD.stderr.once("data", function(data) {
         // we can"t stop execution from this function
-        console.log(new Error(data));
+        console.log(new Error("Sorry"+data));
+        return callback("Sorry");
     });
     childD.addListener("exit", function (code, signal) {
         if (code === null || signal !== null) {

@@ -50,7 +50,7 @@ const options = { extractors: 'words,entailments,entities'};//,categoies,relatio
                            db.connection.query(get_Doctor, [disease], function (err, doctor) {
                                if (err) throw err;
                                else if(doctor.length > 0){
-                                   callback(doctor,"List of Doctors available for your diseases: ");
+                                   callback(doctor,"List of Doctors available for your diseases are mentioned below");
                                }
                                else{
                                    callback("Sorry, but we do not have any doctor available for any of these diseases.");

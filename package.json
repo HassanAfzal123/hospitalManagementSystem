@@ -26,6 +26,7 @@
     "mysql": "^2.16.0",
     "node-speak": "0.0.2",
     "nodemon": "^1.18.7",
+    "os": "^0.1.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
