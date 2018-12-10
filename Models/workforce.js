@@ -9,8 +9,8 @@ module.exports = class WorkForce {
         this.gender = gender || "";
     }
     async addWard(ward) {
-        let ward = new Ward();
-        return await ward.addWard(ward);
+        let wardObj = new Ward();
+        return await wardObj.addWard(ward);
     }
 
     async addDisease(disease) {

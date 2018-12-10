@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  var table = $('#example').DataTable();
     $('#adminData').DataTable({
       "serverSide": true,
       "ajax": "/admin/getAdmin",

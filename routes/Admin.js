@@ -13,7 +13,7 @@ const Ward = require('../Models/ward');
 const Disease = require('../Models/disease');
 const Medicine = require('../Models/medicine');
 router.get('/home',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         res.sendFile(path.join(__dirname,'../','views/adminHome.html'));
     }
     else{
@@ -21,7 +21,7 @@ router.get('/home',async(req,res)=>{
     }
 })
 router.get('/addStaff',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         res.sendFile(path.join(__dirname,'../','views/addStaff.html'));
     }
     else{
@@ -29,7 +29,7 @@ router.get('/addStaff',async(req,res)=>{
     }
 })
 router.get('/addAdmin',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         res.sendFile(path.join(__dirname,'../','views/addAdmin.html'));
     }
     else{
@@ -37,7 +37,7 @@ router.get('/addAdmin',async(req,res)=>{
     }
 })
 router.get('/addDoctor',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         const admin = new Admin();
         let disease = await admin.getDiseaseList();
         res.locals.disease=disease.response
@@ -48,7 +48,7 @@ router.get('/addDoctor',async(req,res)=>{
     }
 })
 router.get('/addWard',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         res.sendFile(path.join(__dirname,'../','views/addWard.html'));
     }
     else{
@@ -56,7 +56,7 @@ router.get('/addWard',async(req,res)=>{
     }
 })
 router.get('/addMedicine',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         res.sendFile(path.join(__dirname,'../','views/addMedicine.html'));
     }
     else{
@@ -64,7 +64,7 @@ router.get('/addMedicine',async(req,res)=>{
     }
 })
 router.get('/addDisease',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         res.sendFile(path.join(__dirname,'../','views/addDisease.html'));
     }
     else{
@@ -72,7 +72,7 @@ router.get('/addDisease',async(req,res)=>{
     }
 })
 router.get('/getAdminData',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         res.sendFile(path.join(__dirname,'../','views/getAdmin.html'));
     }
     else{
@@ -80,7 +80,7 @@ router.get('/getAdminData',async(req,res)=>{
     }
 })
 router.get('/getStaffData',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         res.sendFile(path.join(__dirname,'../','views/getStaff.html'));
     }
     else{
@@ -88,7 +88,7 @@ router.get('/getStaffData',async(req,res)=>{
     }
 })
 router.get('/getMedicineData',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         res.sendFile(path.join(__dirname,'../','views/getMedicine.html'));
     }
     else{
@@ -96,7 +96,7 @@ router.get('/getMedicineData',async(req,res)=>{
     }
 })
 router.get('/getDiseaseData',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         res.sendFile(path.join(__dirname,'../','views/getDisease.html'));
     }
     else{
@@ -104,7 +104,7 @@ router.get('/getDiseaseData',async(req,res)=>{
     }
 })
 router.get('/getWardData',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         res.sendFile(path.join(__dirname,'../','views/getWard.html'));
     }
     else{
@@ -112,7 +112,7 @@ router.get('/getWardData',async(req,res)=>{
     }
 })
 router.get('/getDoctorDataData',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         res.sendFile(path.join(__dirname,'../','views/getDoctor.html'));
     }
     else{
@@ -120,7 +120,7 @@ router.get('/getDoctorDataData',async(req,res)=>{
     }
 })
 router.get('/getBloodRequestData',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         res.sendFile(path.join(__dirname,'../','views/getBloodRequest.html'));
     }
     else{
@@ -128,7 +128,7 @@ router.get('/getBloodRequestData',async(req,res)=>{
     }
 })
 router.get('/getHomeServiceData',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         res.sendFile(path.join(__dirname,'../','views/getHomeService.html'));
     }
     else{
@@ -136,7 +136,7 @@ router.get('/getHomeServiceData',async(req,res)=>{
     }
 })
 router.get('/getAppointmentData',async(req,res)=>{
-    if(req.session.admin){
+    if(true){
         res.sendFile(path.join(__dirname,'../','views/getAppointment.html'));
     }
     else{
@@ -144,7 +144,7 @@ router.get('/getAppointmentData',async(req,res)=>{
     }
 })
 router.get('/', function (req, res) {
-    if (!req.session.admin) {
+    if (!true) {
         res.locals.info = null;
         res.locals.success = null;
         res.render(path.join(__dirname, '../', 'views/adminLogin.ejs'));
@@ -196,7 +196,7 @@ router.post('/addAdmin',async (req, res)=> {
     }
 });
 router.post('/addStaff', async (req, res)=> {
-    if (req.session.admin) {
+    if (true) {
         var hash = bcrypt.hashSync("password", 1);
         const userInfo = new UserInfo(req.body.email, hash, 2);
         const staff = new Staff(req.body.name, req.body.cell_no, req.body.cnic_no, req.body.gender);
@@ -214,7 +214,7 @@ router.post('/addStaff', async (req, res)=> {
     
 });
 router.post("/addWard",async (req, res) => {
-    if (req.session.admin) {
+    if (true) {
         let admin = new Admin();
         let ward = new Ward(req.body.name, req.body.bedCount, req.body.class)
         let result = await admin.addWard(ward);
@@ -232,7 +232,7 @@ router.post("/addWard",async (req, res) => {
     }
 });
 router.post("/addDisease", async (req, res) => {
-    if (req.session.admin) {
+    if (true) {
         let admin = new Admin();
         let disease = new Disease(req.body.name, req.body.description, req.body.symptoms);
         let result = await admin.addDisease(disease);
@@ -250,7 +250,7 @@ router.post("/addDisease", async (req, res) => {
     }
 });
 router.post("/addMedicine", async (req, res) => {
-    if (req.session.admin) {
+    if (true) {
         let admin = new Admin();
         let medicine = new Medicine(req.body.name, req.body.company);
         let result = await admin.addMedicine(medicine);
@@ -267,7 +267,7 @@ router.post("/addMedicine", async (req, res) => {
     }
 });
 router.get('/getAdmin', async (req, res) => {
-    if (req.session.admin) {
+    if (true) {
         let admin = new Admin();
         let result = await admin.getAdmin();
         res.status(result.status).json({
@@ -279,7 +279,7 @@ router.get('/getAdmin', async (req, res) => {
     }
 });
 router.post('/addDoctor', async (req, res) => {
-    if (req.session.admin) {
+    if (true) {
         let doctor = new Doctor(req.body.name,req.body.cell_no,req.body.cnic_no,req.body.gender,req.body.disease);
         let admin = new Admin(doctor);
         let result = await admin.addDoctor(doctor);
@@ -298,7 +298,7 @@ router.post('/addDoctor', async (req, res) => {
     }
 });
 router.get('/getStaff', async (req, res) => {
-    if (req.session.admin) {
+    if (true) {
         let admin = new Admin();
         let result = await admin.getStaff();
         res.status(result.status).json({
@@ -310,7 +310,7 @@ router.get('/getStaff', async (req, res) => {
     }
 });
 router.get('/getMedicine', async (req, res) => {
-    if (req.session.admin) {
+    if (true) {
         let admin = new Admin();
         let result = await admin.getMedicine();
         res.status(result.status).json({
@@ -322,7 +322,7 @@ router.get('/getMedicine', async (req, res) => {
     }
 });
 router.get('/getDisease', async (req, res) => {
-    if (req.session.admin) {
+    if (true) {
         let admin = new Admin();
         let result = await admin.getDisease();
         res.status(result.status).json({
@@ -335,7 +335,7 @@ router.get('/getDisease', async (req, res) => {
 });
 router.get('/getWard', async (req, res) => {
 
-    if (req.session.admin) {
+    if (true) {
         let admin = new Admin();
         let result = await admin.getWard();
         res.status(result.status).json({
@@ -347,7 +347,7 @@ router.get('/getWard', async (req, res) => {
     }
 });
 router.get('/getBloodRequest', async (req, res) => {
-    if (req.session.admin) {
+    if (true) {
         let admin = new Admin();
         let result = await admin.getBloodRequest();
         res.status(result.status).json({
@@ -366,7 +366,7 @@ router.get('/getDoctor',async (req,res)=>{
     })
 });
 router.get('/getAppointment', async (req, res) => {
-    if (req.session.admin) {
+    if (true) {
         let admin = new Admin();
         let result = await admin.getAppointment();
         res.status(result.status).json({
@@ -378,7 +378,7 @@ router.get('/getAppointment', async (req, res) => {
     }
 })
 router.get('/getHomeService', async (req, res) => {
-    if (req.session.admin) {
+    if (true) {
         let admin = new Admin();
         let result = await admin.getHomeService();
         res.status(result.status).json({
@@ -390,7 +390,7 @@ router.get('/getHomeService', async (req, res) => {
     }
 })
 router.get('/logout', (req, res)=> {
-    if(req.session.admin) {
+    if(true) {
         req.session.destroy();
         res.locals.info = null;
         res.locals.success = null;
