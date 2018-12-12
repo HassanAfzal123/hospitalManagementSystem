@@ -154,13 +154,13 @@ router.get('/', function (req, res) {
     }
 });
 router.post('/login', function (req, res, next) {
-    passport.authenticate("local", function (err, user, info) {
+    passport.authenticate("local", function (err, admin, info) {
         if (err) {
             res.locals.info = "Error logging in";
             res.locals.success = null;
             res.render(path.join(__dirname, '../', 'views/adminLogin.ejs'));
         }
-        if (user){
+        if (admin){
             let queryString = "SELECT admin_id from ADMIN A,USER_INFO U where U.info_id = A.USER_INFO_info_id AND U.email = ?";
             db.connection.query(queryString, [req.body.email], function (err, result, fields) {
                 if (err) {
