@@ -14,8 +14,8 @@ module.exports = class WorkForce {
     }
 
     async addDisease(disease) {
-        let disease = new Disease();
-        return await disease.getDisease(disease);
+        let diseaseObj = new Disease();
+        return await diseaseObj.getDisease(disease);
     }
 
     async addMedicine(medicine) {

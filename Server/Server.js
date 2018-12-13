@@ -10,9 +10,10 @@ var io = require("socket.io")(server);
 io.emit('some event', { for: 'everyone' });
 io.on('connection', function(socket){
     socket.on('chat message', function(msg){
-        console.log('message: ' + msg);
-        io.emit('chat message',"USER: "+msg);
-         chat.chatbot(msg,function (getAnswer,getText) {
+        if(msg.length>0){
+			console.log('message: ' + msg);
+			io.emit('chat message',"USER: "+msg);
+			chat.chatbot(msg,function (getAnswer,getText) {
              if(typeof getAnswer === 'string') {
                  let FinalAnswer = JSON.stringify(getAnswer);
                  io.emit('chat message',"BOT: "+ FinalAnswer);
@@ -32,6 +33,10 @@ io.on('connection', function(socket){
                  }
              }
          });
+		}
+		else{
+			io.emit('chat message',"BOT: Please write some thing");
+		}
 
 
 
