@@ -28,14 +28,17 @@ router.post('/',function(req,res){
                     db.connection.query(getDonorId,[req.body.donorName,req.body.donorNumber],function(getDonorIdErr,donorID){
                         if(getDonorIdErr){
                             db.connection.rollback(function () {
+                                console.log(getDonorIdErr);
                                 res.send("You cannot donate right now, please try later on !");
                             });
                         }
                         else{
-                            let setDonorToRequester = "UPDATE BLOOD_REQUEST SET BLOOD_DONOR_donor_id = ? where blood_request_id = ?";
-                            db.connection.query(setDonorToRequester,[donorID[0].donor_id,req.body.requester_id],function (setDonorToRequesterErr) {
+                            console.log(donorID);
+                            let setDonorToRequester = "UPDATE BLOOD_REQUEST SET BLOOD_DONOR_donor_id = ?,status =? where blood_request_id = ?";
+                            db.connection.query(setDonorToRequester,[donorID[0].donor_id,"PROCESSED",req.body.requester_id],function (setDonorToRequesterErr) {
                                 if(setDonorToRequesterErr){
                                     db.connection.rollback(function () {
+                                        console.log(setDonorToRequesterErr);
                                         res.send("You cannot donate right now, please try later on !");
                                     })
                                 }
