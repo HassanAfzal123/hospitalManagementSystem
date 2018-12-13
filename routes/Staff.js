@@ -101,15 +101,16 @@ router.post("/addMedicine", async (req, res) => {
         response: result.response
     })
 });
+var random;
 router.get('/uploadReport', function(req, res, next) {
     if(req.session.staff) {
+        random = ID();
         res.render(path.join(__dirname, '../', 'views/layouts/uploadReport.hbs'));
     }
     else{
         res.send("You are not logged in as Staff");
     }
 });
-var random;
 var ID = function () {
     // Math.random should be unique because of its seeding algorithm.
     // Convert it to base 36 (numbers + letters), and grab the first 9 characters
@@ -135,7 +136,6 @@ router.post('/submitReport',upload.any('file'),function(req, res, next) {
             test_name: req.body.testname,
             PATIENT_patient_id: req.body.patientid
         };
-        random = ID();
         db.connection.query(queryString, [Insert_Report_Data], function (err) {
             if (err) {
 
@@ -144,8 +144,7 @@ router.post('/submitReport',upload.any('file'),function(req, res, next) {
                 }
 
                 else {
-                    console.log(err);
-                    throw err;
+                    res.send("Please refresh your page first and then Upload again !");
                 }
             }
             else {
